@@ -1,0 +1,1327 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cloud Computing – Exam Revision Notes (Weeks 1–12)</title><style>
+:root{--bg:#faf8f3;--fg:#1f2430;--mut:#667;--acc:#0b6e8a;--acc2:#b4472b;--card:#fff;--bd:#e4dfd3;--hl:#fff3b0}
+@media(prefers-color-scheme:dark){:root{--bg:#14171c;--fg:#e6e3da;--mut:#9aa;--acc:#5fc0d8;--acc2:#ef8a6c;--card:#1c2027;--bd:#2d333c;--hl:#5a4d10}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,'Times New Roman',serif}
+.side{position:fixed;top:0;left:0;bottom:0;width:270px;overflow:auto;padding:20px 14px;border-right:1px solid var(--bd);background:var(--card);font-family:system-ui,sans-serif;font-size:14px}
+.side h1{font-size:16px;margin:0 0 10px;color:var(--acc)}.side input{width:100%;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg);margin-bottom:10px}
+.side a{display:block;padding:6px 8px;border-radius:6px;color:var(--fg);text-decoration:none}.side a:hover{background:var(--bg)}.side a b{color:var(--acc2);margin-right:4px}
+main{margin-left:270px;max-width:900px;padding:30px 36px 80px}
+.week{margin-bottom:56px}.week h2{font:700 26px system-ui,sans-serif;border-bottom:3px solid var(--acc);padding-bottom:8px}.week h2 span{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc2)}
+.topic{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:6px 20px 14px;margin:18px 0}
+h3{font:700 19px system-ui,sans-serif;color:var(--acc)}h4{font:600 15px system-ui,sans-serif;margin:16px 0 2px;color:var(--acc2)}
+ul{margin:4px 0 4px 0;padding-left:20px}li{margin:3px 0}li.sub{margin-left:22px;list-style:circle}b{color:var(--fg)}
+mark{background:var(--hl);color:inherit}.hide{display:none}
+@media(max-width:800px){.side{position:static;width:auto;border:0}main{margin:0;padding:16px}}
+@media print{.side{display:none}main{margin:0}}
+</style></head><body><style>.sbar{position:fixed;top:10px;right:12px;z-index:99;display:flex;gap:8px;font:600 13px system-ui,sans-serif}.sbar a{padding:7px 12px;border-radius:8px;background:#0b6e8a;color:#fff;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,.25)}.sbar a.h{background:#fff;color:#0b6e8a;border:1px solid #0b6e8a}@media print{.sbar{display:none}}</style><div class="sbar"><a class="h" href="index.html">&larr; Home</a><a href="Cloud_Computing_Revision_Notes.pdf" download>Download PDF</a></div><nav class="side"><h1>Cloud Computing<br>Revision Notes</h1><input id="q" placeholder="Search notes…" aria-label="Search"><a href="#w1"><b>W1</b> Cloud Computing Overview, Architecture &amp; Service Models</a><a href="#w2"><b>W2</b> Deployment Models, Virtualization, XML, Web Services &amp; SOA</a><a href="#w3"><b>W3</b> SLA, Cloud Economics, Data Management (GFS/BigTable/Dynamo), MapReduce Intro &amp; OpenStack</a><a href="#w4"><b>W4</b> Private Cloud on OpenStack (Meghamala), Azure Web App, Google Cloud Platform</a><a href="#w5"><b>W5</b> SLA / Economics / MapReduce Tutorials, Resource Management I &amp; II</a><a href="#w6"><b>W6</b> Cloud Security I–IV &amp; Broker for Cloud Marketplace</a><a href="#w7"><b>W7</b> Mobile Cloud Computing, Fog Computing, Geospatial Cloud</a><a href="#w8"><b>W8</b> Docker Containers, Green Cloud, Sensor Cloud, IoT Cloud, Course Summary</a><a href="#w9"><b>W9</b> Cloud–Fog–Edge Paradigm, Resource Management &amp; Service Placement, Cloud Federation</a><a href="#w10"><b>W10</b> VM Migration (Live Migration) &amp; Containers (Docker, Kubernetes)</a><a href="#w11"><b>W11</b> Dew Computing, Serverless Computing (FaaS), Sustainable Cloud Computing</a><a href="#w12"><b>W12</b> Cloud in 5G Era, Cyber-Physical Systems, Spatial Cloud, Internet of Health Things (IoHT) Case Study</a></nav>
+<main><article class="week" id="w1"><h2><span>Week 1</span>Cloud Computing Overview, Architecture &amp; Service Models</h2><section class="topic"><h3>1.1 Trends in Computing (evolution order)</h3>
+<ul>
+<li class="">Order: <b>Distributed → Grid → Cluster → Utility → Cloud</b> computing.</li>
+<li class="">Early computing = single processor = <b>centralized (uni-processor)</b> computing.</li>
+</ul>
+<h4>Distributed Computing</h4>
+<ul>
+<li class="">Distributed system: several <b>autonomous</b> computational entities, each with <b>own local memory</b>, communicating by <b>message passing</b>.</li>
+<li class="">Examples: Internet, ATM (bank) machines, Intranets/workgroups.</li>
+<li class="">Computers in a DS: <b>Workstations</b> (end users), <b>Server systems</b> (provide resources/services), <b>Personal assistance devices</b> (handhelds via wireless).</li>
+<li class="">Common properties: <b>fault tolerance</b>, each node plays a partial role (limited/incomplete view), <b>resource sharing</b>, <b>load sharing</b>, easy to expand, performance.</li>
+<li class=""><b>Parallel computing is a subset of distributed computing.</b></li>
+<li class="">Why distributed: nature of application, <b>computing-intensive</b> (e.g., Pi by Monte Carlo), <b>data-intensive</b> (e.g., Facebook, LHC data), <b>robustness – no SPOF</b> (Single Point of Failure).</li>
+<li class="">Past distributed apps were mostly <b>client-server</b> (centralized resource management at server); <b>Peer-to-Peer (P2P)</b> = more "truly" distributed.</li>
+</ul>
+<h4>Grid Computing</h4>
+<ul>
+<li class="">Harnesses <b>unused processing cycles</b> of all computers in a network to solve problems too big for one machine.</li>
+<li class="">Gives a <b>single system image / one large virtual computer</b>; users don't know where resources are.</li>
+<li class=""><b>Electrical power grid analogy</b>: wall socket = access to computing; grid links computing resources like power grid links power plants.</li>
+<li class="">Used for: sharing data/compute/apps in <b>virtual organisations (VO)</b>, multi-institutional collaboration.</li>
+<li class=""><b>Types of grids</b>: <b>Computational</b> (processing power), <b>Data</b> (storage/discovery/handling of data), <b>Collaboration</b> (virtual enterprise work, e.g., CAD without disclosing proprietary tech), <b>Network</b> (fault-tolerant comms; node works as data router/cache), <b>Utility</b> (ultimate form; shares software/special equipment as well).</li>
+</ul>
+<h4>Cluster Computing</h4>
+<ul>
+<li class="">Collection of <b>interconnected stand-alone computers</b> working together as a <b>single integrated resource</b>.</li>
+<li class="">Components: standalone computers (PCs/workstations/SMPs), OS, <b>high-performance interconnects</b>, <b>middleware</b>, parallel programming environments, applications.</li>
+<li class="">Faster, closer connection than LAN; <b>low-latency protocols</b>; <b>loosely coupled compared to SMP</b>.</li>
+<li class="">Types: <b>High Availability (Failover)</b>, <b>Load Balancing</b>, <b>Parallel/Distributed Processing</b> clusters.</li>
+<li class="">Benefits: system availability, hardware fault tolerance (e.g., RAID), OS/app reliability, <b>scalability</b>, high performance.</li>
+</ul>
+<h4>Utility Computing</h4>
+<ul>
+<li class="">A <b>concept</b> that cloud practically implements; resources <b>rented</b>, billed by <b>usage not flat rate (pay-per-use)</b>.</li>
+<li class="">Low/no initial cost. Analogy: electricity, water, gas.</li>
+<li class="">Features: pay-for-use pricing, data-center virtualization &amp; provisioning, solves resource-utilization problem, outsourcing, web services delivery, automation.</li>
+<li class="">Payment models: flat rate, tiered, subscription, <b>metered</b>, pay-as-you-go, standing charges.</li>
+<li class="">Risks: data backup, data security, partner competency, defining SLA, charge-back value.</li>
+</ul>
+</section>
+<section class="topic"><h3>1.2 Cloud Computing – NIST Definition</h3>
+<ul>
+<li class="">NIST: model for <b>ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources</b> (networks, servers, storage, applications, services), <b>rapidly provisioned and released with minimal management effort</b>.</li>
+</ul>
+<h4>5 Essential Characteristics (NIST)</h4>
+<ul>
+<li class=""><b>On-demand self-service</b> – consumer provisions automatically without human interaction with provider.</li>
+<li class=""><b>Broad network access</b> – via standard mechanisms; thin/thick clients (phones, tablets, laptops).</li>
+<li class=""><b>Resource pooling</b> – <b>multi-tenant model</b>; physical/virtual resources dynamically assigned/reassigned.</li>
+<li class=""><b>Rapid elasticity</b> – scale outward/inward; appears unlimited to consumer.</li>
+<li class=""><b>Measured service</b> – metering; usage monitored, controlled, reported (transparency).</li>
+</ul>
+<h4>Common Characteristics</h4>
+<ul>
+<li class="">Massive scale, resilient computing, homogeneity, geographic distribution, <b>virtualization</b>, service orientation, low-cost software, advanced security.</li>
+</ul>
+<h4>Service Models (NIST)</h4>
+<ul>
+<li class=""><b>SaaS</b>: use provider's applications via thin client/browser; consumer controls nothing except limited user config. e.g., Google Spreadsheet, web email, Salesforce CRM.</li>
+<li class=""><b>PaaS</b>: deploy consumer-created apps using provider-supported languages/tools; controls <b>apps + hosting config</b>, not infra. e.g., <b>Microsoft Azure, Google App Engine</b>.</li>
+<li class=""><b>IaaS</b>: provision processing, storage, networks; consumer can deploy <b>arbitrary software incl. OS</b>. e.g., <b>Amazon AWS, Flexiscale</b>.</li>
+</ul>
+<h4>Deployment Models</h4>
+<ul>
+<li class=""><b>Private</b> – operated solely for one organisation (e.g., Windows Server Hyper-V).</li>
+<li class=""><b>Community</b> – shared by several organisations with a common goal.</li>
+<li class=""><b>Public</b> – available to general public (e.g., Google Docs).</li>
+<li class=""><b>Hybrid</b> – two or more clouds; e.g., <b>cloud bursting</b> for load balancing.</li>
+</ul>
+<h4>Virtualization</h4>
+<ul>
+<li class=""><b>Hypervisor / VMM</b> sits between hardware and VMs; intercepts/emulates instructions; examples <b>VMware, Xen, KVM</b>.</li>
+<li class=""><b>Para-virtualization (Xen)</b> performance close to raw physical.</li>
+<li class="">Advantages: run OS where hardware unavailable, easy create/backup/migrate, testing on clean installs, emulate more machines than physical, timeshare lightly loaded systems, run legacy systems.</li>
+</ul>
+</section>
+<section class="topic"><h3>1.3 Advantages &amp; Disadvantages of Cloud</h3>
+<h4>Advantages</h4>
+<ul>
+<li class="">Lower computer costs, improved performance, reduced software costs, <b>instant software updates</b>, improved document format compatibility, <b>unlimited storage</b>, <b>increased data reliability</b>, universal information access, latest version availability, easier group collaboration, device independence.</li>
+</ul>
+<h4>Disadvantages</h4>
+<ul>
+<li class="">Needs <b>constant internet</b>; poor with low-speed connections; features may be limited; can be slow; <b>data security</b> concerns; data can be lost (no local backup).</li>
+<li class=""><b>HPC (MPI/OpenMP) apps</b> are a problem – need co-located VMs for low latency.</li>
+<li class=""><b>No standard API</b> (mix of SOAP and REST); different clouds use different protocols → <b>vendor lock-in/interoperability</b> issues.</li>
+<li class="">Cloud-sourcing concerns: performance/reliability/SLAs, control of data, privacy, security, compliance, trust.</li>
+</ul>
+</section>
+<section class="topic"><h3>1.4 Business Drivers &amp; Economics</h3>
+<ul>
+<li class="">Private data centres have low <b>average utilization of 5–20%</b> (provision for peak).</li>
+<li class="">Cloud gives <b>illusion of infinite capacity</b>, pay only for consumed resource.</li>
+<li class="">IaaS economics example (Shroff): In-house $0.36/hr vs Cloud $0.68/hr (ratio 1.88); efficiency 40% vs 80%; <b>total cost/effective hr $1.36 vs $0.86 → in-house/cloud = 1.58</b>.</li>
+<li class="">Public cloud benefits: high utilization, scalability, no hardware procurement/power cost/admin, SLA ~<b>99% availability</b> with compensation on SLA miss, prototype testing.</li>
+<li class="">Portability bodies: <b>Cloud Computing Interoperability Forum, Open Cloud Consortium</b>; <b>Amazon EC2 and Eucalyptus share same API</b>.</li>
+<li class="">Private cloud: 1 server with 12 cores/12GB cheaper than 12 servers of 1 core/1GB; confidentiality preserved; VMs cheaper and faster to provision.</li>
+<li class=""><b>PaaS vs IaaS</b>: for unpredictable 24×7 web app, IaaS needs minimal servers always on; PaaS costs nothing until used and <b>auto-scales</b>.</li>
+<li class="">PaaS benefits: no scaling/load-balancing handling, web-based IDE, easy dev→production migration.</li>
+<li class="">SaaS benefits: subscribe instead of buying licences; e.g., CRM without own servers.</li>
+</ul>
+</section>
+<section class="topic"><h3>1.5 Cloud Architecture &amp; XaaS</h3>
+<ul>
+<li class=""><b>XaaS = "anything/everything as a service"</b>; essence of cloud; = <b>Cloud (broad network access + resource pooling) + SOI (on-demand business-driven infra + service orientation)</b>.</li>
+<li class="">Other XaaS: BPaaS, Storage aaS, Security (SECaaS), Database (DaaS), Monitoring/Management (MaaS), CaaS, Identity (IDaaS), Backup (BaaS), Desktop (DaaS).</li>
+<li class="">CSP requirements: increase productivity, end-user satisfaction, innovation, agility.</li>
+<li class=""><b>Legacy IT vs Evergreen IT</b>: Legacy = all layers managed by user, tightly-coupled vertical stack, manual provisioning.</li>
+<li class="">Technical architecture: XaaS stack, middleware, management &amp; security. Deployment architecture: <b>geo-location check (legal/export)</b>, operation &amp; monitoring.</li>
+</ul>
+<h4>Client-Server vs Cloud model</h4>
+<ul>
+<li class="">Client-server: simple service model; may/may not be load balanced; limited scalability; <b>no virtualization</b>.</li>
+<li class="">Cloud: variety of service models (IaaS/PaaS/SaaS); load balanced; theoretically infinitely scalable; <b>virtualization is core</b>.</li>
+<li class="">3-tier client-server: presentation, application, data tiers.</li>
+</ul>
+<h4>Who manages what (XaaS stack)</h4>
+<ul>
+<li class="">Stack layers: Applications, Data, Runtime, Middleware, O/S, Virtualization, Servers, Storage, Network.</li>
+<li class=""><b>IaaS</b>: user manages Apps, Data, Runtime, Middleware, O/S; provider manages Virtualization→Network.</li>
+<li class=""><b>PaaS</b>: user manages <b>Apps + Data</b> only; provider manages Runtime and below.</li>
+<li class=""><b>SaaS</b>: provider manages everything.</li>
+<li class="">Analogy: roads = infrastructure; cars/trucks = platform; goods/people = software.</li>
+</ul>
+<h4>SaaS / PaaS / IaaS – When to use</h4>
+<ul>
+<li class=""><b>SaaS</b>: web access, central management, <b>one-to-many</b> model, no patching by user, APIs for integration. Good for: short-term need, demand spikes (tax/billing), web/mobile access. <b>Not good</b>: real-time fast processing, regulation forbids external hosting, existing on-premise suffices.</li>
+<li class=""><b>PaaS</b>: develop/test/deploy/host in same IDE; <b>multi-tenant</b>; built-in scalability/load balancing/failover; collaboration tools; billing mgmt. Good for multiple developers, agile, automated testing. <b>Not ideal</b>: need portability, proprietary languages (<b>vendor lock-in</b>), need hardware customization.</li>
+<li class=""><b>IaaS</b>: resources as a service, dynamic scaling, <b>utility pricing</b>, multiple users on one hardware. Good for volatile demand, start-ups without capital, rapid growth, <b>CapEx → OpEx</b>, temporary needs. <b>Not best</b>: regulatory compliance on offshoring, highest performance needs.</li>
+</ul>
+<h4>Networking &amp; NFV</h4>
+<ul>
+<li class="">Cloud networking concepts: <b>VLAN, VPN</b>, protocol layers; tools: <b>OpenSSH, OpenVPN</b>.</li>
+<li class=""><b>NFV (Network Function Virtualization)</b>: implement network functions in <b>software</b> on industry-standard servers/switches/storage; can be moved/instantiated anywhere without new equipment.</li>
+</ul>
+</section></article><article class="week" id="w2"><h2><span>Week 2</span>Deployment Models, Virtualization, XML, Web Services &amp; SOA</h2><section class="topic"><h3>2.1 Deployment Models (NIST)</h3>
+<h4>Public Cloud</h4>
+<ul>
+<li class="">Infrastructure for <b>open use by general public</b>; exists <b>on premises of the provider</b>. Examples: <b>Google App Engine, Microsoft Azure, IBM SmartCloud, Amazon EC2</b>.</li>
+<li class="">Workload location <b>hidden</b>; provider may migrate workloads anywhere (cheap data centres) unless location-restriction policy offered.</li>
+<li class=""><b>Multi-tenancy risk</b>: co-resident with competitors/attackers → reliability and security risk.</li>
+<li class=""><b>Network dependency</b> on public Internet (DNS, routers, links).</li>
+<li class=""><b>Limited visibility/control</b> – proprietary operation; subscriber <b>cannot verify complete data deletion</b>.</li>
+<li class=""><b>Elasticity</b> – illusion of unlimited resources; <b>low up-front cost</b>; <b>restrictive default SLAs</b>.</li>
+</ul>
+<h4>Private Cloud</h4>
+<ul>
+<li class="">Exclusive use by <b>single organization</b> (multiple consumers/business units); may be <b>on or off premises</b>, managed by org/third party. Examples: <b>Eucalyptus, Ubuntu Enterprise Cloud (UEC), Amazon VPC, VMware Cloud Infrastructure Suite, Microsoft ECI</b>.</li>
+<li class="">Two scenarios: <b>On-site private</b> (at customer premises) and <b>Outsourced private</b> (server side hosted by hosting company).</li>
+<li class=""><b>On-site private</b>: one security perimeter around subscriber + cloud; still needs <b>IT skills</b>; strong security from external threats; <b>significant-to-high up-front cost</b>; <b>limited (fixed) resources</b>; bulk import/export limited by own network.</li>
+<li class=""><b>Outsourced private</b>: <b>two security perimeters</b> joined by <b>protected communications link</b>; security depends on both perimeters + link; <b>modest-to-significant up-front cost</b> (SLA negotiation, network upgrade, porting, training); <b>extensive resources</b> can be rented.</li>
+</ul>
+<h4>Community Cloud</h4>
+<ul>
+<li class="">Exclusive use by a <b>community with shared concerns</b> (mission, security, policy, compliance). Examples: <b>Google Apps for Government, Microsoft Government Community Cloud</b>.</li>
+<li class="">Participant orgs may provide, consume, or both; <b>at least one must provide</b> cloud services; each implements its own security perimeter.</li>
+<li class="">Access policy can be complex (N members) – use <b>RBAC / attribute-based access control</b>.</li>
+<li class="">On-site community: up-front costs <b>highly variable</b> (depends on provide vs consume only). Outsourced community: multiple protected links to provider; similar to outsourced private.</li>
+</ul>
+<h4>Hybrid Cloud</h4>
+<ul>
+<li class="">Composition of <b>two or more distinct clouds</b> (private, community, public) that <b>remain unique entities</b> but bound by standardized/proprietary tech enabling <b>data and application portability</b>. Examples: <b>Windows Azure, VMware vCloud</b>.</li>
+<li class="">Can be extremely <b>complex</b>; may change over time as constituent clouds join/leave.</li>
+</ul>
+</section>
+<section class="topic"><h3>2.2 IaaS Details</h3>
+<ul>
+<li class="">Subscriber gets <b>virtual computers, network-accessible storage, network components (firewalls), configuration services</b>.</li>
+<li class="">Fees: per <b>CPU hour</b>, GB stored/hour, bandwidth, IP addresses/hour, value-added services (monitoring, auto-scaling).</li>
+<li class=""><b>Scope of control</b>: provider controls <b>physical hardware + hypervisor</b>; subscriber controls <b>Guest OS, middleware, applications</b>.</li>
+<li class="">Hypervisor/VMM = lower privileged layer; guest OS = higher layer. VM = "an efficient, isolated duplicate of a real machine".</li>
+</ul>
+<h4>IaaS Cloud Architecture (3-level hierarchy)</h4>
+<ul>
+<li class=""><b>Top: Cloud Manager</b> – public access point; sign-up, authenticating subscribers, credentials, top-level resource management.</li>
+<li class=""><b>Middle: Cluster Manager</b> – manages cluster of computers on high-speed LAN; may be geographically distributed; connected to <b>Persistent Local Storage (PLS)</b>.</li>
+<li class=""><b>Bottom: Computer Manager</b> – runs on each host; uses hypervisor interface to <b>start, stop, suspend, reconfigure VMs</b>; tracks VMs running/startable.</li>
+<li class=""><b>Data Object Storage (DOS)</b> – stores user credentials, OS images; usually <b>single per cloud</b>.</li>
+<li class="">Commands flow <b>top → down</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>2.3 Virtualization</h3>
+<ul>
+<li class="">Lets one computer do job of multiple computers by sharing hardware; run multiple OSes <b>simultaneously &amp; isolated</b> (unlike dual-boot).</li>
+<li class=""><b>Popek &amp; Goldberg (1974)</b> – 3 goals: <b>Equivalence, Resource control, Efficiency</b>.</li>
+<li class="">Instructions: <b>privileged</b> (trap in user mode); <b>sensitive</b> (control-sensitive / behavior-sensitive).</li>
+<li class=""><b>VMM can be constructed if sensitive instructions ⊆ privileged instructions</b>.</li>
+</ul>
+<h4>Server virtualization approaches (3 generations)</h4>
+<ul>
+<li class=""><b>1st: Full virtualization</b> – dynamic <b>binary translation/emulation</b>; guest OS unaware; all hardware emulated; open source emulators <b>QEMU, Bochs</b>; VMware &amp; Microsoft.</li>
+<li class="sub">Pros: isolation, <b>total VM portability</b> (Dell→HP), can run OS of another architecture.</li>
+<li class="sub">Cons: performance cost; guest at <b>Ring 1/3</b> (host holds Ring 0) so VMM must trap/emulate.</li>
+<li class=""><b>2nd: Para-virtualization</b> – <b>guest OS modified</b> (recompile kernel or para-virtual drivers), uses <b>specialized API/hypercalls</b> to VMM; no binary translation; e.g., <b>Xen</b>, VMware. Needs modified OS (Novell yes, Microsoft no).</li>
+<li class=""><b>3rd: Hardware-assisted</b> – silicon-based; guest OS at <b>Ring 0</b>; VMM in more-privileged "<b>Ring −1</b>"; uses <b>Intel VT / AMD-V</b>; runs <b>unmodified OS</b> (legacy OK). Con: speed/flexibility (guest unaware).</li>
+</ul>
+<h4>Network Virtualization</h4>
+<ul>
+<li class="">Making one physical network appear as multiple logical ones.</li>
+<li class="">Related concepts: <b>VPN</b> (not customizable enough), <b>Active &amp; Programmable networks</b>, <b>Overlay networks</b> (application-layer, not flexible enough).</li>
+<li class="">Business-model players: <b>Infrastructure Providers (InPs)</b>, <b>Service Providers (SPs)</b>, <b>End Users</b>, <b>Brokers</b>.</li>
+<li class="">Design principles: concurrence of multiple heterogeneous VNs, recursion, inheritance, revisitation.</li>
+<li class="">Design goals: <b>flexibility, manageability, scalability, security/privacy/isolation, programmability, heterogeneity, experimental/deployment facility (PlanetLab, GENI, VINI), legacy support</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>2.4 XML (eXtensible Markup Language)</h3>
+<ul>
+<li class="">Syntax for encoding <b>text-based data</b>; <b>extensible</b> (own tags), <b>self-describing</b>, hierarchical, universal format; designed for distributed environments; separates content from presentation. Developed from <b>SGML</b>; W3C.</li>
+<li class=""><b>XML vs HTML</b>: HTML = how to display; XML = what the data is (machine &amp; human readable); XML tags <b>not predefined</b>.</li>
+<li class=""><b>Well-formed</b> = syntactically correct (minimum to be XML; parser must stop otherwise). <b>Valid</b> = well-formed + conforms to DTD/Schema.</li>
+<li class="">Structure: XML declaration, elements/tags, attributes, <b>tree data model</b>.</li>
+<li class=""><b>Entities</b>: internal &amp; external (SYSTEM + URL), referenced via &amp;name;. Character references e.g. &amp;#9824;.</li>
+<li class=""><b>Validating parser</b>: must retrieve all entities/DTD; fails if cannot. <b>Non-validating</b>: stops DTD processing at first missing entity but not an error; <b>non-validating is always faster</b>.</li>
+<li class=""><b>DTD</b> (part of core XML) vs <b>XML Schema (2001)</b>: Schema uses pure XML, richer data types (integer, date, ranges); <b>only DTD can declare entities</b>.</li>
+<li class=""><b>Namespaces</b>: identify different vocabularies (`&lt;key/&gt;` security vs database); `xmlns` attribute with URL (URL need not point anywhere).</li>
+</ul>
+<h4>XML Processing APIs</h4>
+<ul>
+<li class=""><b>SAX</b> – event-based, fast, <b>low memory</b>, stream processing; but programmer does everything.</li>
+<li class=""><b>DOM</b> – in-memory <b>tree</b>; good for dynamic modification/querying; <b>slower, more memory</b>; same interface across languages.</li>
+<li class=""><b>JDOM</b> – Java-specific, nicer OO interface than DOM. <b>dom4j</b> – Java framework; supports SAX/DOM/JDOM, mixed SAX/DOM.</li>
+<li class=""><b>XSLT</b> – XML language to <b>transform</b> XML (tree transformation) using a style sheet.</li>
+<li class=""><b>Parsers</b>: Xerces (Apache), XML4j (IBM).</li>
+</ul>
+<h4>XML Messaging</h4>
+<ul>
+<li class="">XML as message format; transports: HTTP, HTTPS, SMTP, MQ, IIOP, JMS. Disadvantage: asynchronous, no delivery guarantee.</li>
+<li class=""><b>XML-RPC</b> – simple encoding of method call &amp; parameters. <b>SOAP</b> – more complex wrapper.</li>
+</ul>
+</section>
+<section class="topic"><h3>2.5 Web Services &amp; SOA</h3>
+<ul>
+<li class=""><b>Web Service</b>: application component that communicates via open protocols, processes <b>XML messages framed using SOAP</b>, describes messages with <b>XML Schema</b>, endpoint described by <b>WSDL</b>, discovered via <b>UDDI</b>.</li>
+<li class="">Evolution: structured programming → OOP → distributed computing → <b>EDI</b> → WWW → Web services.</li>
+<li class=""><b>EDI</b>: computer-to-computer exchange of business documents in standard formats; Web services similar but <b>simpler &amp; cheaper</b>, can work alongside EDI.</li>
+<li class="">Problems solved: <b>Interoperability</b> (DCOM bound to Windows, RMI bound to Java), <b>Firewall traversal</b> (CORBA/DCOM use non-standard ports; WS use <b>HTTP port 80</b>), <b>Complexity</b>.</li>
+<li class="">Text-based, so easier to debug.</li>
+</ul>
+<h4>SOA (IBM model) – 3 entities</h4>
+<ul>
+<li class=""><b>Service provider</b>, <b>service requestor</b>, <b>service broker/registry</b>.</li>
+<li class="">Operations: <b>Publish</b>, <b>Find</b>, <b>Bind</b>.</li>
+</ul>
+<h4>WS Components</h4>
+<ul>
+<li class=""><b>XML</b> (data representation), <b>SOAP</b> (communication), <b>WSDL</b> (describe services), <b>UDDI</b> (register/locate).</li>
+<li class="">Steps: client queries UDDI registry → registry refers to WSDL doc → client accesses WSDL → client sends SOAP request → service returns SOAP response.</li>
+</ul>
+<h4>SOAP</h4>
+<ul>
+<li class=""><b>Simple Object Access Protocol</b>; XML-based; platform &amp; language independent; mainly over <b>HTTP</b>; <b>stateless, one-way</b>.</li>
+<li class="">Building blocks: <b>Envelope (required)</b>, <b>Header (optional)</b>, <b>Body (required)</b>, <b>Fault (optional)</b>.</li>
+<li class="">Why SOAP: Unix RPC, CORBA, RMI, DCOM require specific platforms; SOAP is platform neutral.</li>
+<li class="">Characteristics: <b>Extensibility, Neutrality (HTTP/SMTP/TCP), Independence</b>.</li>
+<li class="">Security: HTTP over SSL; <b>WS-Security</b> defines complete encryption system.</li>
+</ul>
+<h4>WSDL</h4>
+<ul>
+<li class="">XML vocabulary describing web services = <b>contract</b> between service and client; says where service is and what protocol.</li>
+<li class="">Main elements: <b>portType</b> (operations), <b>message</b>, <b>types</b>, <b>binding</b> (protocols).</li>
+</ul>
+<h4>UDDI</h4>
+<ul>
+<li class="">Framework for XML-based <b>registries</b>; like <b>telephone yellow pages</b>; publish &amp; find services; interrogated using SOAP; provides WSDL docs.</li>
+<li class="">WS Security stack: WS-Security, WS-Policy, WS-Trust, WS-Privacy, WS-Federation, WS-Authorization, WS-SecureConversation.</li>
+</ul>
+</section></article><article class="week" id="w3"><h2><span>Week 3</span>SLA, Cloud Economics, Data Management (GFS/BigTable/Dynamo), MapReduce Intro &amp; OpenStack</h2><section class="topic"><h3>3.1 Service Level Agreement (SLA)</h3>
+<h4>Basics</h4>
+<ul>
+<li class="">SLA = <b>formal contract between Service Provider (SP) and Service Consumer (SC)</b>; foundation of consumer's trust; defines formal basis for <b>performance and availability</b> the SP guarantees.</li>
+<li class="">SLA contains <b>Service Level Objectives (SLOs)</b> = <b>objectively measurable conditions</b> for the service. SLA &amp; SLO = basis for <b>selecting a cloud provider</b>.</li>
+<li class="">SLO examples: availability of service X is 99.9%; response time of query Q between 3–5 s; throughput of server S at peak load.</li>
+<li class="">SLO covers QoS parameters: availability, serviceability, billing, penalties, throughput, response time, quality.</li>
+<li class=""><b>Service Level Management</b> = monitoring/measuring performance of services based on SLOs.</li>
+</ul>
+<h4>SLA Contents</h4>
+<ul>
+<li class="">Set of services; definition of each service; responsibilities of provider &amp; consumer; <b>metrics</b>; <b>auditing mechanism</b>; <b>remedies</b> if terms not met; how SLA changes over time.</li>
+</ul>
+<h4>Web Service SLA languages</h4>
+<ul>
+<li class=""><b>WS-Agreement</b> – XML-based language/protocol for negotiating, establishing, managing agreements at runtime; request-response; helps discover compatible providers.</li>
+<li class=""><b>WSLA (Web Service Level Agreement framework)</b> – XML-schema-based language + runtime interpreter; monitors QoS and reports violations; <b>lacks formal semantics of metrics</b>.</li>
+</ul>
+<h4>Cloud SLA vs Web-Service SLA</h4>
+<ul>
+<li class="">WS: response time, violation rate, availability, cost. <b>Cloud: security, privacy, trust, management</b>.</li>
+<li class="">WS: negotiation/provisioning/monitoring <b>not automated</b>; <b>Cloud: SLA automation required</b> (dynamic, scalable).</li>
+<li class="">WS resource discovery via <b>UDDI</b>.</li>
+</ul>
+<h4>Types of SLA</h4>
+<ul>
+<li class=""><b>Off-the-shelf (non-negotiable / direct) SLA</b> – provider creates template; used by present-day clouds; not suited for mission-critical apps.</li>
+<li class=""><b>Negotiable SLA</b> – via one or multiple external agents.</li>
+</ul>
+<h4>SLA Considerations &amp; Requirements</h4>
+<ul>
+<li class="">Business-level objectives, responsibilities of both parties, <b>business continuity &amp; disaster recovery</b>, <b>system redundancy</b>, maintenance, <b>location of data</b>, <b>seizure of data</b> (multi-tenancy → others affected).</li>
+<li class="">Requirements: security, <b>data encryption</b>, privacy (isolation in multi-tenancy), data retention &amp; deletion, hardware erasure, <b>regulatory compliance</b>, transparency (notify breaches), certification, <b>monitoring (neutral third party removes conflict of interest)</b>, <b>auditability</b>.</li>
+</ul>
+<h4>KPIs and Metrics</h4>
+<ul>
+<li class=""><b>KPIs = low-level resource metrics</b> (downtime, uptime, inbytes, outbytes, packet size) aggregated into high-level SLOs.</li>
+<li class=""><b>Availability A = 1 − (downtime/uptime)</b> (as given in slides).</li>
+<li class="">Metrics: <b>Throughput</b>, <b>Availability</b> (% uptime in observation period), <b>Reliability</b> (how often available), <b>Load balancing</b> (when elasticity kicks in), <b>Durability</b> (likelihood data is not lost), <b>Elasticity</b>, <b>Linearity</b> (performance as load increases), <b>Agility</b>, <b>Automation</b> (% requests handled without humans), customer service response time, <b>service-level violation rate</b>, transaction time.</li>
+</ul>
+<h4>Example Cloud SLAs</h4>
+<ul>
+<li class=""><b>Amazon EC2 (IaaS): 99.95%</b>; <b>Amazon S3: 99.9%</b>; <b>SimpleDB: no SLA</b>; Salesforce CRM: no SLA guarantee.</li>
+<li class=""><b>Microsoft Azure Compute: 99.95%</b>; <b>Azure Storage: 99.9%</b>.</li>
+<li class=""><b>Rackspace</b>: internal network 100%, data centre infrastructure 100%, load balancers 99.9%; server migration notified 24 h ahead &amp; done in max 3 h; recovery within 1 h.</li>
+<li class=""><b>Terremark vCloud Express</b>: 100% monthly uptime. <b>Nirvanix</b>: 99.9%.</li>
+</ul>
+<h4>Limitations of SLAs</h4>
+<ul>
+<li class="">Measured only as <b>uptime percentage</b> (ignores stability, capacity); <b>biased towards vendors</b>; <b>lack of active monitoring on customer side</b> (customers use ticketing, must report outages themselves); gap between QoS hype and reality; <b>no formal way to verify compliance</b>.</li>
+</ul>
+<h4>Expected SLA parameters</h4>
+<ul>
+<li class=""><b>IaaS</b>: CPU capacity, memory, boot time, storage, scale up/down, auto-scaling, availability, response time.</li>
+<li class=""><b>PaaS</b>: integration, scalability, billing, deployment environment. <b>SaaS</b>: reliability, usability, scalability, availability, customizability, response time.</li>
+<li class=""><b>Storage-aaS</b>: location, space, billing, security, backup, fault tolerance, recovery, throughput, bandwidth, data life-cycle.</li>
+</ul>
+</section>
+<section class="topic"><h3>3.2 Cloud Economics</h3>
+<h4>Economic properties (mnemonic <b>CLOUD</b>)</h4>
+<ul>
+<li class=""><b>C</b>ommon infrastructure (pooled, standardized; <b>statistical multiplexing</b>), <b>L</b>ocation-independence (latency reduction, user experience), <b>O</b>nline connectivity, <b>U</b>tility pricing (pay-per-use; beneficial under <b>variable demand</b>), on-<b>D</b>emand resources (elastic provisioning without delay/cost).</li>
+</ul>
+<h4>Value of common infrastructure</h4>
+<ul>
+<li class="">Economies of scale (lower overhead, buyer power); <b>statistics of scale</b> – multiplexing demand → higher utilization.</li>
+<li class=""><b>Coefficient of Variation Cv = σ / |μ|</b> (std dev ÷ mean) – measure of "smoothness"; not variance or correlation coefficient.</li>
+<li class="">Aggregating <b>n independent identical demands reduces Cv by factor √n</b> (Cv/√n); aggregating <b>100 workloads → penalty ~10%</b>.</li>
+<li class=""><b>Negatively correlated</b> demands (X and 1−X) smooth best; <b>perfectly correlated</b> demands → Cv unchanged; simultaneous peaks hurt.</li>
+<li class="">Midsize providers can achieve statistical economies similar to huge ones when demands independent.</li>
+</ul>
+<h4>Value of location independence</h4>
+<ul>
+<li class="">Latency strongly correlated with <b>distance</b>; speed of light in fibre ≈ 124 miles/ms; VoIP with ≥200 ms latency is poor. Global user base needs dispersed architecture (consistency, availability, partition tolerance).</li>
+</ul>
+<h4>Value of utility pricing</h4>
+<ul>
+<li class="">Cloud need not be cheaper per unit to be economical (rental car analogy: buy/lease ₹10,000/day vs rent ₹45,000/day → <b>U = 4.5</b>).</li>
+<li class="">Notation: D(t) demand; <b>P</b> peak; <b>A</b> average; <b>B</b> baseline (owned) unit cost; <b>C</b> cloud unit cost; <b>U = C/B</b> utility premium.</li>
+<li class=""><b>C_T = U·B·∫D(t)dt = A·U·B·T</b>;  <b>B_T = P·B·T</b> (owned must handle peak).</li>
+<li class=""><b>Cloud is cheaper when U &lt; P/A</b> (utility premium &lt; peak-to-average demand ratio).</li>
+<li class="">Real world: demand spiky (Slashdot effect, tax season, Christmas) → <b>hybrid model</b> often best; also consider network cost, interoperability overhead, reliability.</li>
+</ul>
+<h4>Value of on-demand services</h4>
+<ul>
+<li class=""><b>Penalty cost ∝ ∫|D(t) − R(t)| dt</b> (pay for unused resources or suffer missed service).</li>
+<li class="">Flat demand → penalty 0; linear demand → periodic provisioning acceptable; <b>exponential demand D(t)=e^t</b> with provisioning delay t_p → R(t)=e^(t−t_p); gap = k₁e^t (grows exponentially).</li>
+</ul>
+</section>
+<section class="topic"><h3>3.3 Managing Data in the Cloud</h3>
+<h4>Relational DB &amp; storage</h4>
+<ul>
+<li class="">RDBMS default since 80s; efficient for transaction processing (System R, Ingres). SQL parser → memory/disk operations; DB file system independent of OS file system for full control of page retention.</li>
+<li class=""><b>Row-oriented storage</b>: best for write/transaction processing; B+-tree indexes. <b>Column-oriented storage</b>: best for <b>data warehouse</b> workloads (e.g., Vertica).</li>
+</ul>
+<h4>Parallel DB architectures</h4>
+<ul>
+<li class=""><b>Shared memory</b> (SMP, multi-CPU servers); <b>Shared nothing</b> (independent servers, own disks, network); <b>Shared disk</b> (hybrid; shared storage via <b>NAS/SAN</b>).</li>
+<li class="">Parallel DB advantages: parallel SQL, partitioned tables, distributed joins, <b>two-phase commit</b>, fault tolerance. Examples: Oracle, DB2, SQL Server; warehouses: <b>Netezza, Vertica, Teradata</b>.</li>
+</ul>
+<h4>Google File System (GFS) / HDFS</h4>
+<ul>
+<li class="">GFS manages large files on commodity servers; fault tolerance a necessity: <b>p(system failure) = 1 − (1 − p(component failure))^N</b>. HDFS = open source GFS.</li>
+<li class=""><b>Single Master</b> (GFS) = <b>Name Node</b> (HDFS) holds namespace/metadata. Files split into <b>chunks (GFS) / blocks (HDFS)</b>, typically <b>64 MB</b>, stored on <b>chunk servers (GFS) / data nodes (HDFS)</b>, <b>replicated 3 times</b> on different racks/network segments.</li>
+<li class=""><b>Read</b>: client sends path + offset to master → master returns metadata of a replica → client <b>caches metadata</b> → reads from chunk server.</li>
+<li class=""><b>Write/Append</b>: master returns all replicas → client sends data to all → master designates one <b>primary</b> → primary picks offset → informs replicas.</li>
+<li class=""><b>Fault tolerance</b>: master–chunk server <b>heartbeat messages</b>; new primary assigned on failure.</li>
+</ul>
+<h4>BigTable</h4>
+<ul>
+<li class="">Distributed structured storage on GFS; <b>sparse, persistent, multi-dimensional sorted map</b>; accessed by <b>row key, column key, timestamp</b>; column = <b>column-family:label</b>; families fixed at creation, labels dynamic; cells store multiple <b>timestamped versions</b>.</li>
+<li class="">Table split into <b>tablets</b> (row ranges) managed by <b>tablet servers</b>; each column family of a tablet stored in an <b>SSTable</b>; <b>metadata table/server</b> locates tablets; <b>root tablet</b>.</li>
+</ul>
+<h4>Dynamo (Amazon)</h4>
+<ul>
+<li class="">Simple <b>&lt;key, value&gt;</b> model; supports many small concurrent updates; suited for e-commerce; <b>independent of GFS/HDFS</b>.</li>
+<li class=""><b>MD5</b> 128-bit hash; keys mapped onto ring of <b>virtual nodes</b>; replicated on primary + (N−1) nodes.</li>
+<li class=""><b>Quorum</b>: read from R replicas, write to W replicas; <b>R + W &gt; N → quorum consistent</b>; maintains <b>eventual consistency</b>.</li>
+<li class=""><b>Vector timestamps</b> for versioning; conflicts resolved by application logic; storage engines: <b>Berkeley DB (used by Amazon)</b>, MySQL.</li>
+</ul>
+<h4>Datastore (Google App Engine) / SimpleDB (Amazon)</h4>
+<ul>
+<li class="">Simple transactional key-value stores; all entities in <b>one BigTable table</b>; sorted lexicographically; supports prefix &amp; range queries; entity groups for transactions.</li>
+<li class="">Auto-created indexes: <b>single-property</b> and <b>kind</b> indexes; <b>composite indexes</b> configurable; highest-selectivity index chosen.</li>
+</ul>
+</section>
+<section class="topic"><h3>3.4 MapReduce Introduction</h3>
+<ul>
+<li class=""><b>Parallel computing models</b>: shared-memory (any processor accesses any memory) vs distributed-memory (message passing).</li>
+<li class=""><b>Parallel efficiency</b> = T / (p × T_p); inefficiency from synchronization, communication overhead, load imbalance. <b>Scalable</b> = efficiency stays constant as data and processors grow.</li>
+<li class="">Word-frequency illustration: approach 2 (each processor handles n/p documents for all m words, then sums) is <b>more efficient &amp; scalable</b> than approach 1 (each handles m/p words, reading many unneeded words).</li>
+<li class=""><b>MapReduce</b> (Google): <b>Map</b>: (k1,v1) → [(k2,v2)]; <b>Reduce</b>: (k2,[v2]) → (k2, f([v2])). <b>M mappers, R reducers, single master</b>. Mapper output: one file per reducer, sorted by key, on <b>local disk</b>; reducers fetch via <b>RPC</b>; final output to <b>GFS</b>.</li>
+<li class=""><b>Fault tolerance</b>: <b>heartbeat</b>; failed <b>mapper → re-executed</b> (output is on local disk); failed <b>reducer → only remaining tasks reassigned</b> (completed already in GFS); stragglers → duplicate tasks.</li>
+<li class=""><b>Efficiency</b>: ε_MR = 1 / (1 + 2cσ/w).</li>
+<li class="">Applications: <b>inverted indexing</b>, relational operations (joins/group by) at large scale with fault tolerance. <b>Hadoop</b> = open-source MapReduce (Yahoo!), on Amazon EC2 AMIs.</li>
+</ul>
+</section>
+<section class="topic"><h3>3.5 OpenStack</h3>
+<ul>
+<li class=""><b>Cloud operating system</b> controlling pools of compute, storage, networking via dashboard; started by <b>NASA + Rackspace</b>; supports IaaS (and PaaS e.g. Cloud Foundry on top, SaaS).</li>
+<li class="">Features: VMs on demand, provisioning, snapshotting, multi-tenancy, <b>quotas</b> per project/user.</li>
+</ul>
+<h4>Components (service → project)</h4>
+<ul>
+<li class=""><b>Compute → Nova</b> (spawn, schedule, decommission VMs).</li>
+<li class=""><b>Networking → Neutron</b> (Network-Connectivity-as-a-Service; pluggable).</li>
+<li class=""><b>Object storage → Swift</b> (REST/HTTP; replicated; not a mountable file server).</li>
+<li class=""><b>Block storage → Cinder</b> (persistent block storage to instances).</li>
+<li class=""><b>Identity → Keystone</b> (authN/authZ; catalog of endpoints).</li>
+<li class=""><b>Image service → Glance</b> (stores/retrieves VM disk images).</li>
+<li class=""><b>Telemetry → Ceilometer</b> (metering for billing, benchmarking).</li>
+<li class=""><b>Dashboard → Horizon</b> (web self-service portal).</li>
+</ul>
+<h4>Workflow</h4>
+<ul>
+<li class="">User logs into <b>Horizon</b> → Keystone issues token → Horizon sends request to <b>Nova API</b> (validates token with Keystone) → Nova API <b>rpc.cast to Scheduler</b> via message queue → Scheduler filters/selects compute node → <b>Nova Compute</b> (asks <b>Conductor</b> for VM info) → <b>Neutron</b> configures network → <b>Cinder</b> gives block device → <b>Glance</b> gives image URI → image retrieved via <b>Swift</b> → hypervisor runs VM.</li>
+</ul>
+<h4>Storage concepts</h4>
+<ul>
+<li class=""><b>Ephemeral</b> (Nova): persists until VM terminated; local file system. <b>Block</b> (Cinder): persists until deleted; block device (/dev/vdc). <b>Object</b> (Swift): persists until deleted; accessible from anywhere; stores files incl. VM images.</li>
+</ul>
+</section></article><article class="week" id="w4"><h2><span>Week 4</span>Private Cloud on OpenStack (Meghamala), Azure Web App, Google Cloud Platform</h2><section class="topic"><h3>4.1 Private Cloud using OpenStack – "Meghamala" @ IIT Kharagpur</h3>
+<ul>
+<li class=""><b>Meghamala</b> = IIT Kharagpur's private cloud built using <b>OpenStack</b>.</li>
+<li class="">Lifecycle shown: <b>Overview → VM creation → Accessing VM by user → VM termination</b>.</li>
+<li class="">Login through <b>Horizon</b> (web dashboard).</li>
+<li class="">Dashboard views: overview of <b>compute nodes</b>, graphical <b>resource usage</b>, details of <b>instances</b> (each VM gets internal IP e.g. 10.4.0.x and a floating/public IP), <b>volumes (Cinder)</b>, <b>images (Glance)</b>, <b>security group rules (Neutron)</b>, <b>hypervisor vCPU/RAM/storage (Nova)</b>, <b>flavors (Nova)</b>, compute services.</li>
+<li class="">Component mapping: <b>Nova</b> = compute/flavors/hypervisors; <b>Glance</b> = images; <b>Cinder</b> = volumes; <b>Neutron</b> = networks/security groups; <b>Keystone</b> = identity; <b>Horizon</b> = dashboard.</li>
+<li class=""><b>Flavor</b> = predefined VM size (vCPU, RAM, disk).</li>
+<li class=""><b>Security group</b> = set of network access rules for instances.</li>
+<li class="">Created VM was accessed using the <b>X2Go client</b> (remote desktop) – example VM named *cloud-nptel*.</li>
+<li class="">After use, the VM is <b>terminated</b> from the dashboard to release resources.</li>
+</ul>
+</section>
+<section class="topic"><h3>4.2 Microsoft Azure – Overview</h3>
+<ul>
+<li class="">Growing collection of integrated cloud services to <b>build, deploy and manage</b> applications via a <b>global network of datacenters</b>.</li>
+<li class="">Highlights: deploy anywhere with your choice of tools (<b>consistent hybrid cloud</b>, open source), trusted cloud (security, privacy, compliance, transparency), accelerate app innovation (consistent portal), insights from analytics.</li>
+<li class=""><b>Azure Web Apps</b> = highly scalable, <b>self-patching</b> web hosting service (<b>PaaS</b>).</li>
+<li class="">Prerequisites for demo: <b>Git</b> and <b>Python</b>.</li>
+</ul>
+<h4>Steps: Create a Python (Flask) web app on Azure</h4>
+<ul>
+<li class="">Log in to <b>portal.azure.com</b>; launch <b>Azure Cloud Shell</b> (free <b>bash</b> shell inside portal).</li>
+<li class=""><b>Clone</b> sample repo → change directory → <b>install Flask</b> → run locally (`http://localhost:5000` shows *Hello World*).</li>
+<li class=""><b>Configure a deployment user</b> (needed for <b>FTP and local Git</b> deployment): `az webapp deployment user set --user-name &lt;u&gt; --password &lt;p&gt;`.</li>
+<li class=""><b>Create a resource group</b> = logical container for Azure resources (web apps, databases, storage accounts).</li>
+<li class=""><b>Create an App Service plan</b> – defines <b>region, instance size (small/medium/large), scale count (1–20 instances), SKU (Free, Shared, Basic, Standard, Premium)</b>; multiple apps can share one plan to save money.</li>
+<li class=""><b>Create the web app</b> – hosting space + URL (`&lt;name&gt;.azurewebsites.net`).</li>
+<li class=""><b>Configure Python version</b> (uses a default platform container).</li>
+<li class=""><b>Configure local Git deployment</b> (App Service supports <b>FTP, local Git, GitHub, Visual Studio Team Services, Bitbucket</b>).</li>
+<li class=""><b>Add Azure remote</b> to local repo → <b>git push azure master</b> (use the deployment-user password, <b>not</b> portal password).</li>
+<li class="">To update: edit `main.py` → <b>commit</b> → <b>push</b> → refresh page.</li>
+</ul>
+</section>
+<section class="topic"><h3>4.3 Google Cloud Platform (GCP)</h3>
+<ul>
+<li class="">Set of <b>modular cloud-based services</b> to build, test and deploy apps on Google's infrastructure (simple websites to complex apps).</li>
+<li class="">Why GCP: runs on Google's infrastructure (billions of searches in ms, YouTube, Gmail); <b>focus on product</b> (managed services, SDKs, console); <b>mix and match</b> (VMs, managed platform, blob/block storage, NoSQL datastore, MySQL, big-data analytics); <b>scale to millions</b> – auto <b>scale up and scale down</b>, <b>pay only for what you use</b>; consistent CPU/memory/disk performance, global network &amp; edge cache; support.</li>
+<li class="">Services: <b>App Engine = PaaS</b> (focus on code, no patching); <b>Compute Engine = raw VMs (IaaS)</b>; <b>Cloud SQL = MySQL</b>; <b>Cloud Datastore = NoSQL</b>; <b>Cloud Storage = object storage with global edge caching</b>; Google <b>APIs</b>; <b>Cloud Endpoints</b>.</li>
+</ul>
+<h4>Example 1: Host a static web page on Cloud Storage</h4>
+<ul>
+<li class="">Create a <b>bucket</b> → edit configuration / <b>Configure website</b> (set <b>Main page</b> and <b>404 page</b>) → upload files → make them <b>shared publicly</b> → use the public link (storage.googleapis.com/...).</li>
+</ul>
+<h4>Example 2: Python web app on App Engine</h4>
+<ul>
+<li class="">Create <b>project</b> and App Engine application → select <b>region</b> → select <b>language</b> → activate <b>Cloud Shell</b> → clone <b>Hello World</b> sample.</li>
+<li class="">Each app needs <b>app.yaml</b> (configuration) and <b>main.py</b> (code; Flask).</li>
+<li class="">Run local dev server: <b>`dev_appserver.py $PWD`</b> (watches files &amp; reloads).</li>
+<li class="">Deploy: <b>`gcloud app deploy app.yaml --project &lt;id&gt;`</b>; view: <b>`gcloud app browse`</b>.</li>
+</ul>
+</section></article><article class="week" id="w5"><h2><span>Week 5</span>SLA / Economics / MapReduce Tutorials, Resource Management I &amp; II</h2><section class="topic"><h3>5.1 SLA Tutorial (worked problems)</h3>
+<h4>Key facts</h4>
+<ul>
+<li class="">SLA = formal contract between <b>Service Provider (SP) and Service Consumer (SC)</b>; foundation of consumer trust; contains <b>SLOs</b> (objectively measurable conditions); basis of provider selection.</li>
+<li class=""><b>Availability % = (Total service hours − Outage hours) / Total service hours × 100</b>.</li>
+</ul>
+<h4>Problem 1 – 99% guarantee, app runs 12 h/day for a month</h4>
+<ul>
+<li class="">Total service time = 12 × 30 = <b>360 h</b>; allowed downtime = 1% = <b>3.6 h</b>.</li>
+<li class="">Actual outage = <b>10.75 h &gt; 3.6 h</b> → availability ≈ <b>97.0%</b> → <b>provider HAS violated</b> the guarantee.</li>
+</ul>
+<h4>Problem 2 – 99.95% guarantee, 30 days, 12 h/day, $50/day</h4>
+<ul>
+<li class="">Service credit table: uptime <b>&lt; 99.95% → 10% credit</b>; <b>&lt; 99% → 25% credit</b>.</li>
+<li class="">Outages: 5 h + 30 m + 1 h 30 m + 15 m + 2 h 25 m = <b>9 h 40 m ≈ 9.67 h</b>.</li>
+<li class="">Uptime = (360 − 9.67)/360 ≈ <b>97.3% (&lt; 99%)</b> → <b>25% credit</b>.</li>
+<li class="">Cost = 30 × $50 = $1500; credit = $375 → <b>effective cost payable = $1125</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>5.2 Cloud Economics Tutorial</h3>
+<h4>Properties (CLOUD)</h4>
+<ul>
+<li class=""><b>C</b>ommon infrastructure (pooled, standardized; <b>statistical multiplexing</b>), <b>L</b>ocation-independence, <b>O</b>nline connectivity, <b>U</b>tility pricing (<b>pay-per-use</b>, good for variable demand), on-<b>D</b>emand resources (scalable/elastic).</li>
+</ul>
+<h4>Utility pricing formulae</h4>
+<ul>
+<li class="">D(t) demand; <b>P</b> = peak demand; <b>A</b> = average demand; <b>B</b> = baseline (owned) unit cost; <b>C</b> = cloud unit cost; <b>U = C/B</b> utility premium.</li>
+<li class=""><b>C_T = A·U·B·T</b>; <b>B_T = P·B·T</b> (owned capacity sized for peak).</li>
+<li class=""><b>Cloud cheaper iff C_T &lt; B_T ⇔ U &lt; P/A</b>.</li>
+<li class="">Real world: spiky demand (news, promotions, product launches, flash floods, tax season, Christmas) → <b>hybrid model</b> often best; also consider network cost, interoperability overhead, reliability/accessibility.</li>
+</ul>
+<h4>Value of on-demand services</h4>
+<ul>
+<li class=""><b>Penalty cost ∝ ∫|D(t) − R(t)| dt</b> (pay for unused resource <b>or</b> suffer missed service).</li>
+<li class="">Flat demand → penalty 0; linear demand → periodic provisioning acceptable; <b>exponential demand D=e^t</b> with provisioning interval t_p → R=e^(t−t_p); shortfall = k₁e^t grows exponentially.</li>
+</ul>
+<h4>Assignment 1 (solved)</h4>
+<ul>
+<li class="">D(t)=50 sin t (0≤t&lt;π/2), 20 sin t (π/2≤t&lt;π); R(t)=D(t)+δ·D′(t); δ=π/12; cost 0.9/unit/time.</li>
+<li class="">|D−R| = δ|D′|; ∫|D′|dt = 50 + 20 = 70 → <b>penalty = 0.9 × (π/12) × 70 ≈ 16.5 units</b>.</li>
+</ul>
+<h4>Assignment 2 (solved)</h4>
+<ul>
+<li class="">D(t)=50(1+e^−t), P=100; T=100 → <b>A ≈ 50.5</b>; <b>P/A ≈ 1.98</b>; <b>U = 200/120 ≈ 1.67</b>.</li>
+<li class="">U &lt; P/A → <b>cloud is cheaper</b>. (C_T ≈ 1,010,000 vs B_T = 1,200,000.)</li>
+</ul>
+<h4>Assignment 3 (solved) – in-house vs cloud server</h4>
+<ul>
+<li class="">3-year hours = 3×365×24 = 26,280. In-house cost/hr = 6,00,000/26,280 ≈ <b>₹22.83</b>.</li>
+<li class=""><b>Price of a core-hour</b>: in-house = 22.83/12 ≈ <b>₹1.90</b>; cloud = 42/8 = <b>₹5.25</b>.</li>
+<li class=""><b>Cost per effective hour</b> = cost/efficiency: in-house = 22.83/0.4 ≈ <b>57.08</b>; cloud = 42/0.8 = <b>52.5</b>.</li>
+<li class=""><b>Total cost/effective-hour</b> = cost/effective-hr + power &amp; cooling + management: in-house = 57.08+22+6 ≈ <b>85.08</b>; cloud = 52.5+0+1 = <b>53.5</b>.</li>
+<li class=""><b>Ratio in-house : cloud ≈ 1.59</b>.</li>
+<li class="">If in-house efficiency = 70%: 22.83/0.7 + 28 ≈ <b>60.6</b> &gt; 53.5 → <b>cloud still better</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>5.3 MapReduce Tutorial</h3>
+<ul>
+<li class=""><b>MapReduce</b>: programming model from <b>Google</b>; for large-scale search/text processing on web data stored in <b>BigTable + GFS</b>; massively parallel (tens of thousands of processors); <b>fault tolerant</b>. <b>Hadoop</b> = open-source implementation (<b>developed at Yahoo!</b>), available as pre-packaged <b>AMIs on Amazon EC2</b>.</li>
+<li class="">Two phases: <b>Map</b> and <b>Reduce</b>; <b>M mappers, R reducers</b>, coordinated by a <b>single master</b>.</li>
+<li class=""><b>Map phase</b>: each mapper reads ≈ <b>1/M</b> of input from global file system (locations from master); <b>(k1,v1) → [(k2,v2)]</b>; writes <b>one file per reducer</b>, <b>sorted by key</b>, on <b>local file system</b>; master tracks file locations.</li>
+<li class=""><b>Reduce phase</b>: master tells reducers where data is; reducers fetch via <b>remote procedure calls</b>; group by same key and apply f: <b>(k2,[v2]) → (k2, f([v2]))</b>; final results written to <b>GFS</b>.</li>
+<li class="">Example: word count – 3 mappers, 2 reducers; map: (d_k,[w1…wn]) → [(w_i,c_i)]; reduce: (w_i,[c_i]) → (w_i, Σc_i).</li>
+</ul>
+<h4>Problems (solved)</h4>
+<ul>
+<li class=""><b>P1 (HDFS blocks, 64 MB)</b>: files 64 KB → 1 block; 65 MB → 2 blocks; 127 MB → 2 blocks → <b>total 5 blocks</b> (a small file still uses its own block but only occupies its actual size).</li>
+<li class=""><b>P2 (average of integers)</b>: Map emits (key="avg", value=x) for each integer (better: (key,(x,1)) so a combiner can be used); Reduce sums values and counts → for A=(10,20,30,40,50): map output (avg,10),(avg,20)…; reduce: sum=150, count=5 → <b>average = 30</b>.</li>
+<li class=""><b>P3 (salary by gender)</b>: Map parses "Name, Gender, Salary" → emits (Gender, Salary); Reduce: total = Σ salaries, average = total/count per gender.</li>
+<li class=""><b>P4 (word-length categorization)</b>: Map: for each word emit (category, 1) where <b>tiny 1–2, small 3–5, medium 6–9, big ≥10 letters</b>; Reduce: sum counts per category.</li>
+</ul>
+</section>
+<section class="topic"><h3>5.4 Resource Management – I (Green Cloud)</h3>
+<ul>
+<li class=""><b>Resource types</b>: <b>Physical</b> (computer, disk, database, network, scientific instruments) and <b>Logical</b> (execution, monitoring, communication application).</li>
+<li class=""><b>Resource management</b> = operations to control how capabilities of cloud resources/services are made available to users/apps/services <b>efficiently</b>.</li>
+</ul>
+<h4>Data-centre power consumption</h4>
+<ul>
+<li class="">Servers ≈ <b>0.5% of world's electricity</b>; server energy demand <b>doubles every 5–6 years</b>; large CO₂ from fossil fuels; need to cut energy with <b>minimal performance impact</b>.</li>
+<li class=""><b>Economic motivation</b>: megawatt scale, millions of dollars to operate, facilities at peak and can't expand without new power source. <b>Environmental</b>: majority fossil fuels, huge CO₂, sustainable sources not ready.</li>
+</ul>
+<h4>Green computing</h4>
+<ul>
+<li class="">Advanced scheduling to cut energy: <b>power-aware</b> and <b>thermal-aware</b>.</li>
+<li class=""><b>Performance/Watt is not following Moore's law.</b></li>
+<li class="">Data-centre design to reduce <b>Power Usage Effectiveness (PUE)</b>: cooling systems, rack design.</li>
+</ul>
+<h4>Green Cloud Framework</h4>
+<ul>
+<li class=""><b>Virtual Machine controls</b>: <b>Scheduling</b> (power-aware, thermal-aware) and <b>Management</b> (VM image design, migration, dynamic shutdown).</li>
+<li class=""><b>Data-centre design</b>: server &amp; rack design, air conditioning &amp; recirculation.</li>
+</ul>
+<h4>VM scheduling on multi-core systems</h4>
+<ul>
+<li class=""><b>Non-linear</b> relationship between # active cores and power (Intel Core i7 920, 4 cores/8 virtual with Hyperthreading: ~105 W idle → ~170 W with 8 cores).</li>
+<li class=""><b>Power-aware scheduling</b>: <b>greedy</b> algorithm; schedule <b>as many VMs as possible on one multi-core node</b>, track cores per node, match VM needs to node capacity.</li>
+<li class="">Example: all 8 VMs on one node (170 W) + 3 idle nodes (105 W each) = <b>485 W</b> vs spreading 2 VMs on each of 4 nodes (138 W each) = <b>552 W</b>.</li>
+</ul>
+<h4>VM management</h4>
+<ul>
+<li class="">Monitor load. <b>Load decreases</b> → <b>live-migrate</b> VMs to more-utilized nodes, <b>shut down unused nodes</b>. <b>Load increases</b> → use <b>Wake-on-LAN (WOL)</b> to start nodes, schedule new VMs.</li>
+</ul>
+<h4>VM image minimization</h4>
+<ul>
+<li class="">VMs are loaded with unwanted packages/services; clouds are <b>service-oriented (SOA)</b> → need <b>lightweight Linux VM</b>; small images reduce <b>network latency</b>.</li>
+<li class="">Typical image: start from <b>Ubuntu 9.04</b>; remove packages not needed (<b>no X11, no window manager</b>, minimal server); <b>readahead profiling</b> (reorder boot sequence, prefetch files, cut CPU idle from I/O); optimized kernel (built for <b>Xen DomU</b>, no 3D/sound, modules built in).</li>
+<li class="">Energy savings: boot time <b>38 s → 8 s</b>; 30 s @ 250 W = 2.08 Wh ≈ 0.002 kWh; small cloud (100 images/h) saves ~$262.65/yr at 15.2¢/kWh; production cloud (1000 images/min) saves 120 kWh/h → <b>&gt; $1 million/yr</b>; image size <b>4 GB → 635 MB</b> (faster live migration).</li>
+<li class="">Summary: combine power-aware + thermal-aware scheduling; integrated server/rack/cooling; small savings → large impact; combining methods has larger impact than individually.</li>
+</ul>
+</section>
+<section class="topic"><h3>5.5 Resource Management – II (IaaS)</h3>
+<ul>
+<li class=""><b>IaaS</b> is the most popular cloud service; provider offers VMs, raw (block) storage, firewalls, load balancers, network devices; <b>resource management is a major challenge</b>.</li>
+<li class=""><b>Objectives</b>: scalability, quality of service, optimal utility, reduced overheads, improved throughput, reduced latency, specialized environment, cost effectiveness, simplified interface.</li>
+<li class=""><b>Challenges – hardware</b>: CPU, memory, storage, workstations, network elements, sensors/actuators. <b>Logical</b>: OS, energy, network throughput/bandwidth, load balancing, information security, delays, APIs, protocols.</li>
+<li class=""><b>Aspects</b>: provisioning, allocation, requirement mapping, adaptation, discovery, brokering, estimation, modeling (and scheduling).</li>
+</ul>
+<h4>Definitions</h4>
+<ul>
+<li class=""><b>Provisioning</b> – allocation of a provider's resources to a customer.</li>
+<li class=""><b>Allocation</b> – distribution of resources economically among competing groups/programs.</li>
+<li class=""><b>Adaptation</b> – ability of system to adjust resources dynamically to meet user needs.</li>
+<li class=""><b>Mapping</b> – correspondence between resources required by users and resources available at provider.</li>
+<li class=""><b>Modeling</b> – based on detailed info on network elements/entities; states, transitions, inputs/outputs; helps <b>predict future requirements</b>.</li>
+<li class=""><b>Estimation</b> – close guess of actual resources an application needs.</li>
+<li class=""><b>Discovery &amp; selection</b> – identify list of authenticated resources available for job submission and choose the best.</li>
+<li class=""><b>Brokering</b> – negotiation of resources through an agent so resources are available at the right time.</li>
+<li class=""><b>Scheduling</b> – timetable of events/resources (depends on duration, predecessor activities, relationships, resources allocated).</li>
+</ul>
+<h4>Approaches (name → key idea)</h4>
+<ul>
+<li class=""><b>Provisioning</b>: <b>Nash equilibrium (game theory)</b>; <b>network queuing model</b> (tiers as queues); <b>prototype provisioning</b> (<b>k-means</b> clustering + queuing model); <b>VM provisioning</b> on <b>Xen</b> with <b>SEDF (Simple Earliest Deadline First)</b> scheduler &amp; weighted fair CPU sharing; adaptive provisioning (bottleneck detection); <b>SLA-oriented</b> methods; dynamic &amp; automated framework; <b>OCRP – Optimal Cloud Resource Provisioning</b> (demand/price uncertainty; deterministic equivalent formulation, sample-average approximation).</li>
+<li class=""><b>Allocation</b>: <b>market-oriented</b> (uses <b>Model Predictive Control, MPC</b>); <b>intelligent multi-agent model</b>; <b>energy-aware (ant-colony / pheromone)</b>; measurement-based performance analysis (co-location); dynamic allocation based on VM load; real-time allocation for small/medium IaaS; <b>dynamic scheduling &amp; consolidation using DAGs</b>.</li>
+<li class=""><b>Mapping</b>: symmetric mapping pattern (3 functions); <b>load-aware mapping</b> (multicast image transfer, caching); minimum congestion mapping (graph mapping); <b>iterated local search</b> request partitioning; SOA API; <b>impatient task mapping (genetic algorithm, throughput as fitness)</b>; <b>DEVAs</b> (distributed ensembles of virtual appliances); mapping virtual network onto substrate network (<b>backbone mapping</b>).</li>
+<li class=""><b>Adaptation</b>: <b>reinforcement-learning guided control policy</b> (MIMO feedback control); web-service-based prototype; <b>OnTimeMeasure</b> service (thin-client virtual desktop clouds); virtual networks architecture; <b>DNS-based load balancing</b>; <b>hybrid approach</b> (layered queuing models for Xen, <b>bin packing + gradient search</b>).</li>
+<li class=""><b>Performance metrics for resource management</b>: <b>reliability, ease of deployment, QoS, delay, control overhead</b>.</li>
+</ul>
+</section></article><article class="week" id="w6"><h2><span>Week 6</span>Cloud Security I–IV &amp; Broker for Cloud Marketplace</h2><section class="topic"><h3>6.1 Cloud Security I – Basics of Security</h3>
+<h4>Basic components (CIA)</h4>
+<ul>
+<li class=""><b>Confidentiality</b> – keeping data/resources hidden. <b>Integrity</b> – data integrity + <b>origin integrity (authentication)</b>. <b>Availability</b> – enabling access to data/resources.</li>
+</ul>
+<h4>Security attacks (4 types) – source S → destination D</h4>
+<ul>
+<li class=""><b>Interruption</b> → attack on <b>availability</b>.</li>
+<li class=""><b>Interception</b> → attack on <b>confidentiality</b>.</li>
+<li class=""><b>Modification</b> → attack on <b>integrity</b>.</li>
+<li class=""><b>Fabrication</b> → attack on <b>authenticity</b>.</li>
+</ul>
+<h4>Passive vs active attacks</h4>
+<ul>
+<li class=""><b>Passive</b>: eavesdropping; <b>release of message contents</b> and <b>traffic analysis</b>; very hard to detect (prevent rather than detect).</li>
+<li class=""><b>Active</b>: <b>masquerade</b> (pretend to be another entity), <b>replay</b> (capture and retransmit), <b>modification</b> of message, <b>denial of service</b>.</li>
+</ul>
+<h4>Classes of threats</h4>
+<ul>
+<li class=""><b>Disclosure</b> (snooping), <b>Deception</b> (modification, spoofing, repudiation of origin, denial of receipt), <b>Disruption</b> (modification), <b>Usurpation</b> (modification, spoofing, delay, DoS).</li>
+</ul>
+<h4>Policies, mechanisms, goals</h4>
+<ul>
+<li class=""><b>Policy</b> says what is/is not allowed; <b>mechanisms</b> enforce policy. Conflicting policies → vulnerabilities.</li>
+<li class="">Security goals: <b>Prevention, Detection, Recovery</b> (continue to function even if attack succeeds).</li>
+<li class=""><b>Assurance</b>: specification → design → implementation.</li>
+<li class="">Operational issues: cost-benefit analysis, risk analysis, laws &amp; customs. Human issues: organizational problems, <b>insiders/outsiders, social engineering</b>.</li>
+</ul>
+<h4>Security services</h4>
+<ul>
+<li class="">Confidentiality, <b>authentication</b>, integrity, <b>non-repudiation</b> (order is final), <b>access control</b>, availability.</li>
+<li class="">Role of security infrastructure: confidentiality, integrity, availability, authentication (identify users), <b>authorization</b> (is operation allowed?), non-repudiation, safety.</li>
+</ul>
+<h4>Types of attack</h4>
+<ul>
+<li class="">Social engineering/phishing, physical break-ins, password attacks, <b>buffer overflows</b>, <b>command injection</b>, DoS, faulty application logic, snooping, packet manipulation/fabrication, backdoors.</li>
+</ul>
+<h4>Network security – 6 steps</h4>
+<ul>
+<li class=""><b>1. Determine security policy</b> (usage, training, privacy policy, update/audit schedule; DMZ &amp; firewall placement).</li>
+<li class=""><b>2. Implement policy</b>: install <b>firewalls</b> (<b>iptables</b> on Linux; default <b>drop</b> incoming) and <b>IDS</b> (<b>snort</b>).</li>
+<li class="sub">Firewall types: <b>Packet filter</b> (dest IP/port/protocol), <b>Stateful</b> (tracks TCP sessions; drops out-of-session packets), <b>Application proxy</b> (scans all layers for malicious data).</li>
+<li class="sub"><b>IDS</b> scans incoming messages and creates alerts.</li>
+<li class=""><b>3. Reconnaissance</b>: find hosts, key servers, services, vulnerabilities; <b>passive = undetectable</b>, <b>active = often detectable by IDS</b>.</li>
+<li class=""><b>4. Vulnerability scanning</b>: <b>Nessus</b> (detects, produces risk report); <b>Metasploit</b> (exploit; choose <b>payload</b> = code that runs once inside).</li>
+<li class=""><b>5. Penetration testing</b>: exploit vulnerabilities using frameworks (Metasploit).</li>
+<li class=""><b>6. Post-attack investigation</b>: forensics; maintain <b>chain of evidence</b>; examine <b>low-level copy of disk</b>, not original; usually by third party.</li>
+</ul>
+</section>
+<section class="topic"><h3>6.2 Cloud Security II – Threats &amp; Risks</h3>
+<ul>
+<li class="">Cloud = outsourcing; <b>infinite elastic scalability, on-demand just-in-time provisioning, no upfront cost (reduces CAPEX), pay-as-you-go</b>.</li>
+<li class="">Providers benefit from higher datacenter <b>utilization</b>.</li>
+<li class="">Clouds still face traditional <b>confidentiality, integrity, availability, privacy</b> issues + additional attacks. (IDC survey: <b>security</b> top barrier.)</li>
+</ul>
+<h4>Why cloud brings new threats</h4>
+<ul>
+<li class=""><b>Co-tenancy</b>: attacker can legitimately sit on the same physical machine as target; customer <b>lacks control</b> over data &amp; apps; <b>reputation fate-sharing</b>.</li>
+</ul>
+<h4>Security stack / responsibilities</h4>
+<ul>
+<li class=""><b>IaaS</b>: provider secures facilities→hardware (customer secures more). <b>PaaS</b>: provider handles platform &amp; infrastructure security. <b>SaaS</b>: provider responsible for most (service levels, security, governance, compliance, liability).</li>
+<li class="">Moving IaaS → SaaS: <b>provider's security responsibility increases, customer's decreases</b>.</li>
+</ul>
+<h4>Gartner's Seven Cloud Security Risks</h4>
+<ul>
+<li class=""><b>1 Privileged user access</b> (ask about hiring/oversight of admins). <b>2 Regulatory compliance &amp; audit</b> (providers refusing audits signal "trivial use only"). <b>3 Data location</b> (jurisdiction, cross-border laws, SOX, HIPAA, subcontracting). <b>4 Data segregation</b> (encryption not a cure-all; key store protection). <b>5 Recovery</b> (replicate across sites; <b>RPO</b> = max data loss, <b>RTO</b> = max time to restore). <b>6 Investigative support</b> (logs co-located, spread across hosts). <b>7 Long-term viability</b> (data retrieval format; switching causes: price rise, bankruptcy, shutdown, quality drop, dispute; <b>vendor lock-in</b>).</li>
+</ul>
+<h4>Other security issues</h4>
+<ul>
+<li class=""><b>Virtualization</b>: components <b>VM and VMM/hypervisor</b>; major function <b>resource isolation</b>.</li>
+<li class="sub">Hypervisor vulnerabilities: <b>shared clipboard</b>, <b>keystroke logging</b>, <b>VM backdoors (covert channel)</b>, <b>ARP poisoning</b>.</li>
+<li class="sub">Hypervisor risks: <b>rogue hypervisor rootkits</b>, external modification of hypervisor, <b>VM escape</b> (malicious code bypasses VM to get root on host), DoS.</li>
+<li class=""><b>Access control &amp; identity management (IDM)</b>: authenticate users/services; identity theft; privacy via data mining.</li>
+<li class=""><b>Application security</b> (web-service based): <b>injection attacks</b>, <b>XML Signature Element Wrapping</b> (body moved into wrapper in SOAP header), <b>Cross-Site Scripting (XSS)</b>, flooding attacks.</li>
+<li class=""><b>Data life-cycle management</b>: confidentiality, integrity (is provider computing/storing correctly?), availability (DoS, provider going out of business), <b>data location</b>, archive, access latency.</li>
+</ul>
+</section>
+<section class="topic"><h3>6.3 Cloud Security III – Cross-VM Attacks (Ristenpart et al., CCS 2009)</h3>
+<ul>
+<li class="">Paper: <b>"Hey, You, Get Off of My Cloud!"</b> – first work on <b>cloud cartography</b>; attack on <b>Amazon EC2</b>; up to <b>40% success</b> in co-residence with target VM.</li>
+<li class="">New risks: trust &amp; dependence on provider; <b>multi-tenancy</b> (VMs of different customers on same hardware).</li>
+<li class="">Side-channels: cross-VM leakage through shared <b>CPU data caches</b>; can extract <b>RSA/AES keys</b>.</li>
+</ul>
+<h4>Attack model – two steps</h4>
+<ul>
+<li class=""><b>Placement</b> (get malicious VM on same physical machine as victim) and <b>Extraction</b> (side-channel attack).</li>
+<li class="">Threat model: provider trusted; no insider/admin or hypervisor-bug attacks; attacker is a normal paying customer (max <b>20 instances</b> in parallel per EC2 account).</li>
+</ul>
+<h4>Four questions</h4>
+<ul>
+<li class="">Q1 can one <b>locate</b> an instance in cloud? Q2 can one detect <b>co-residence</b>? Q3 can adversary <b>cause co-residence</b>? Q4 can adversary <b>exploit</b> co-residence?</li>
+</ul>
+<h4>Amazon EC2 facts</h4>
+<ul>
+<li class=""><b>Xen hypervisor</b>; <b>Dom0</b> = privileged VM managing guests (appears as a hop in traceroute). Three degrees of freedom: <b>instance type, region, availability zone</b>. Instance has internal &amp; external IP.</li>
+</ul>
+<h4>Q1 – Cloud cartography</h4>
+<ul>
+<li class="">Hypothesis: different <b>availability zones and instance types map to different IP ranges</b>; EC2 internal address space cleanly partitioned by zone. Tools: <b>nmap</b> (TCP connect probe), <b>hping</b> (TCP SYN traceroute), <b>wget</b>, <b>WHOIS</b> (find EC2 prefixes).</li>
+</ul>
+<h4>Q2 – Determining co-residence (network-based checks)</h4>
+<ul>
+<li class="">Likely co-resident if: <b>matching Dom0 IP</b> (last hop in SYN traceroute), <b>small packet round-trip times</b>, <b>numerically close internal IPs</b>. Verified using a <b>hard-disk-based covert channel</b>. Efficient check needs at most <b>two TCP SYN packets</b> ("quiet").</li>
+</ul>
+<h4>Q3 – Causing co-residence</h4>
+<ul>
+<li class=""><b>Brute-force placement</b>: 141 of 1686 victims (<b>8.4%</b> coverage).</li>
+<li class=""><b>Placement locality</b>: <b>sequential</b> (one instance launched after another terminates, often same machine) and <b>parallel</b>. <b>Instance flooding</b>: launch many instances right after victim launches → <b>40% success with just 20 probes</b>.</li>
+</ul>
+<h4>Q4 – Exploiting co-residence</h4>
+<ul>
+<li class="">Covert channels, <b>cache-usage measurement (Prime–Trigger–Probe)</b>, <b>load-based co-residence check</b>, <b>estimating web-traffic rate</b> of co-resident site, <b>keystroke timing attack</b> (inter-keystroke timing → password recovery).</li>
+</ul>
+<h4>Preventive measures</h4>
+<ul>
+<li class=""><b>Randomize IP allocation</b>, block nmap/traceroute, hide Dom0, <b>disallow co-residence</b> (good for user but inefficient for provider); <b>side-channel leakage: no complete solution</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>6.4 Cloud Security IV – Secure Collaboration in SaaS Clouds</h3>
+<ul>
+<li class="">Unique features: <b>co-tenancy</b> and <b>lack of control</b> over outsourced data/apps. SaaS = <b>maximum lack of control</b> (no active data streams/audit trails/outage reports).</li>
+<li class="">Collaboration types: <b>tightly-coupled (federated)</b> vs <b>loosely-coupled</b> (dynamic sharing; security mechanisms mostly designed for tightly-coupled).</li>
+<li class="">Goal: select an <b>ideal SaaS provider</b> and secure <b>loosely-coupled collaboration</b> in it. Four objectives:</li>
+<li class="sub"><b>I. SelCSP</b> – framework to select a <b>trustworthy and competent</b> collaboration provider (trust/reputation/competence; standard SLA parameters).</li>
+<li class="sub"><b>II. Recommend access requests from anonymous users</b> using <b>Risk-based Access Control (RAC)</b> with <b>fuzzy inference system</b> – balances <b>access risk vs security uncertainty</b>; more flexible than binary <b>MLS</b>.</li>
+<li class="sub"><b>III. Inter-Domain Role Mapping (IDRM)</b> – find a <b>minimal set of roles</b> covering requested permissions; <b>no polynomial-time solution</b> → greedy heuristics; variants <b>IDRM-safety</b> and <b>IDRM-availability</b>; goal: minimal <b>excess privilege</b>.</li>
+<li class="sub"><b>IV. Dynamic detection &amp; removal of access-policy conflicts</b> (distributed, uses local info): conflicts = <b>cyclic inheritance</b> and <b>violation of Separation of Duty (SoD)</b>; uses <b>role sequences/role cycles (safe &amp; unsafe)</b>; removal via <b>RBAC hybrid hierarchy (I-, A-, IA-hierarchy)</b> or introducing a <b>virtual role</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>6.5 Broker for Cloud Marketplace</h3>
+<ul>
+<li class="">Need: many providers with varying QoS → intelligent <b>"middle man" broker</b> to suggest best provider and safeguard customer.</li>
+<li class="">Motivation: flexible provider selection, trustworthiness, monitoring, <b>avoiding vendor lock-in</b>.</li>
+<li class="">Objectives: select most suitable provider for QoS requirements; compute <b>degree of SLA satisfaction &amp; trustworthiness</b>; <b>dynamic service migration</b> decisions.</li>
+<li class="">Related approaches: <b>CloudCmp</b> (compares providers' QoS), fuzzy provider selection, satisfaction-measure frameworks, trust/competence-based selection.</li>
+<li class="">Architecture: <b>Provider selection</b> by <b>fuzzy inference engine</b> (inputs: offered QoS + trust; output: suitability; request goes to max suitability) → <b>Monitoring module</b> (third party/monitoring tool) → <b>Migration decider</b> (fuzzy; output <b>degree of SLA satisfaction</b>; <b>migrate if below threshold</b>) → <b>Migration module</b> (selects target provider).</li>
+<li class="">Case studies (IaaS and SaaS): <b>10 providers, 500 requests, year-long simulation</b>, degraded QoS follows <b>Gaussian distribution</b>; compared with <b>conventional minimum-cost crisp broker</b> (fuzzy broker performs better).</li>
+</ul>
+</section></article><article class="week" id="w7"><h2><span>Week 7</span>Mobile Cloud Computing, Fog Computing, Geospatial Cloud</h2><section class="topic"><h3>7.1 Mobile Cloud Computing (MCC)</h3>
+<h4>Basics</h4>
+<ul>
+<li class="">Motivation: growth of smartphones/apps; mobile devices have <b>resource limits (battery, storage, bandwidth)</b>; cloud offers infrastructure/platform/software on demand.</li>
+<li class=""><b>MCC = combination of cloud computing + mobile computing + wireless networks</b> to bring rich computational resources to mobile users; removes need for powerful device (CPU, memory).</li>
+<li class=""><b>Mobile Backend-as-a-Service (MBaaS)</b>: lets mobile app developers connect apps to backend cloud storage/processing; abstracts infrastructure; useful for multiple apps/platforms/developers.</li>
+<li class="">Examples of cloud augmenting mobiles: <b>Amazon Silk</b> (split browser), <b>Apple Siri</b> (speech recognition in cloud), <b>Apple iCloud</b> (storage &amp; sync), image recognition / augmented reality (Google Glass).</li>
+<li class="">Why MCC: speed &amp; flexibility, shared resources (data-intensive work in cloud), integrated data, fewer device resources used.</li>
+<li class=""><b>Pros</b>: saves battery, faster execution. <b>Cons</b>: must send program state (consumes battery), <b>network latency</b> can delay execution.</li>
+<li class="">MCC = framework to <b>augment a resource-constrained device by executing parts of the program on cloud servers</b>.</li>
+</ul>
+<h4>Architecture</h4>
+<ul>
+<li class="">Mobile devices connect via <b>base stations</b> to mobile networks → requests go to <b>central processors/servers</b> providing mobile network services → delivered to the <b>cloud through Internet</b> → <b>cloud controllers</b> process requests and provide services.</li>
+</ul>
+<h4>Key components of an offloading system</h4>
+<ul>
+<li class=""><b>Profiler</b> – monitors execution (time, power consumption, network traffic).</li>
+<li class=""><b>Solver</b> – decides which parts run on mobile vs cloud (partitioning).</li>
+<li class=""><b>Synchronizer</b> – collects/combines results of split execution, keeps it transparent to the user.</li>
+<li class=""><b>Dynamic runtime offloading</b>: application profiling, runtime partitioning, migration of intensive components, continuous synchronization.</li>
+</ul>
+<h4>Advantages of MCC</h4>
+<ul>
+<li class=""><b>Extends battery life</b> (computation offloading), improves <b>data storage capacity &amp; processing power</b>, improves <b>reliability &amp; availability</b> (data in cloud; virus scanning, authentication), <b>dynamic provisioning, scalability, multi-tenancy, ease of integration</b>.</li>
+</ul>
+<h4>Challenges</h4>
+<ul>
+<li class=""><b>Security for mobile users</b> (malicious code, GPS privacy; move threat detection to cloud) and <b>securing data on clouds</b>.</li>
+<li class=""><b>Context-aware mobile cloud services</b> (use data types, network status, device environment, user preferences to improve QoS).</li>
+<li class="">Network access management; <b>QoS (network delay)</b> – <b>CloneCloud and Cloudlets</b> reduce delay; <b>standard interface/interoperability</b>; <b>service convergence</b>.</li>
+<li class="">Communication issues: <b>low bandwidth</b> (biggest issue), service availability, heterogeneity of networks.</li>
+</ul>
+<h4>MCC systems</h4>
+<ul>
+<li class=""><b>MAUI (Mobile Assistance Using Infrastructure)</b>: programmer marks methods as <b>"remoteable"</b>; <b>native methods cannot be remoteable</b>; MAUI server in cloud; profiler + solver decide at runtime to save <b>energy and time</b>.</li>
+<li class=""><b>COMET (Code Offload by Migrating Execution Transparently)</b>: works on <b>unmodified applications</b> (only binaries); <b>threads migrate</b>; runs multi-threaded programs correctly; sends only <b>modified parts of the heap</b>.</li>
+</ul>
+<h4>Task partitioning problem</h4>
+<ul>
+<li class="">Core problem: partition a program across heterogeneous resources = classic <b>task partitioning / job scheduling problem</b>.</li>
+<li class="">Input: <b>call graph (DAG)</b> with per-node energy to run locally and energy to transfer state. Output: two sets (run on mobile / run on cloud).</li>
+<li class=""><b>Native tasks</b> must run on the mobile (e.g., v1, v4, v9). Formulated as <b>0-1 integer linear program (ILP)</b>: I_v = 0 local, 1 cloud. NP-hard → heuristics (no performance guarantee).</li>
+<li class=""><b>Static partitioning</b>: ILP solved at app launch. <b>Dynamic/adaptive partitioning</b>: conditions and input change for long-running programs.</li>
+</ul>
+<h4>Cloudlet</h4>
+<ul>
+<li class=""><b>Cloudlet</b> = trusted, resource-rich computer/cluster, well connected to the Internet, available to <b>nearby mobile devices</b>; <b>middle tier of 3-tier hierarchy: mobile device – cloudlet – cloud</b>.</li>
+<li class="">Reduces latency (single-hop, Wi-Fi) and lowers battery use.</li>
+</ul>
+<h4>When to offload? (energy model)</h4>
+<ul>
+<li class="">Energy saved = <b>P_c × C/M − P_i × C/S − P_tr × D/B</b>, where C = instructions to compute, M = mobile speed, S = server speed (<b>S = F × M</b>, F = how many times faster), D = data transmitted, B = bandwidth, <b>P_c</b> = power while computing on phone, <b>P_i</b> = power while idle (waiting), <b>P_tr</b> = power while transmitting.</li>
+<li class="">Rewritten: <b>(C/M)·(P_c − P_i/F) − P_tr·(D/B)</b>.</li>
+<li class=""><b>Offloading beneficial when large computation C with small communication D</b> (D/B small compared with C/M and F large). Not all apps save energy in the cloud.</li>
+<li class="">Offloading approaches: partition by estimated energy before execution; dynamic partitioning using runtime trade-off; profile-based cost graph.</li>
+</ul>
+<h4>Evaluating MCC</h4>
+<ul>
+<li class=""><b>Energy consumption, time to completion, monetary cost, security.</b></li>
+<li class="">Open questions: practical framework; scalable partitioning (NP-hard); relevant parameters.</li>
+</ul>
+<h4>Applications</h4>
+<ul>
+<li class=""><b>Mobile healthcare</b>, <b>mobile gaming</b> (offload rendering), <b>mobile commerce</b>, <b>mobile learning</b> (cloud-based m-learning), assistive apps for blind (pedestrian crossing guide, currency reader).</li>
+</ul>
+<h4>MuSIC (Mobility-aware optimal Service allocation In mobile Cloud computing)</h4>
+<ul>
+<li class="">Handles <b>user mobility</b>; multiple QoS goals (delay, power, cost). Uses <b>tiered cloud architecture</b>: <b>Tier 1 = public clouds</b> (EC2, Azure, App Engine – scalable but lacking fine location granularity); local/cloudlet tiers closer to user.</li>
+<li class="">Modelling: <b>Location-Time Workflow (LTW)</b> = application workflow + user trajectory; model includes cloud service set, local cloud capacity, location map; <b>MAPCloud analytics</b> from user log DB and QoS-aware service DB.</li>
+</ul>
+<h4>Case study – Context-aware dynamic parking service</h4>
+<ul>
+<li class="">MCC + vehicular networks (context-aware vehicular CPS). Parking-space context from <b>WSN</b> → traffic cloud → users. <b>Dynamic parking</b>: temporary roadside parking permitted when traffic capacity allows (decided by traffic authorities using historical flow, road &amp; weather conditions); reservation service; <b>context-aware optimization</b> uses expected parking duration.</li>
+</ul>
+</section>
+<section class="topic"><h3>7.2 Fog Computing</h3>
+<h4>Why fog?</h4>
+<ul>
+<li class="">Cloud-only problems: <b>high latency</b> (e.g., accident-location alerts via distant datacenter), <b>core-network congestion</b> from centralized datacenters, high bandwidth need; unsuitable for <b>real-time</b> apps.</li>
+<li class="">Cloud features: dynamic scalability, no infrastructure management by user, metered service.</li>
+</ul>
+<h4>Definition</h4>
+<ul>
+<li class=""><b>Fog computing (fogging/edge computing)</b> – data, processing and applications are concentrated in <b>devices at the network edge</b> rather than almost entirely in the cloud. Term <b>introduced by Cisco</b> (for IoT).</li>
+<li class="">Cellular base stations, routers, Wi-Fi gateways can run applications; end devices (sensors) do basic processing; <b>lower response time → real-time apps</b>; reduces bandwidth by <b>aggregating data at access points</b>.</li>
+<li class="">Fog <b>extends cloud and services to the edge</b>; <b>not a replacement</b> for cloud – fog + cloud handshake needed.</li>
+<li class=""><b>Fog enablers</b>: <b>virtualization</b> (VMs on edge), <b>containers (e.g., Docker – lightweight)</b>, <b>Service-Oriented Architecture</b>.</li>
+<li class=""><b>Benefits</b>: <b>low latency &amp; location awareness</b>, widespread geographic distribution, <b>mobility support</b>, very large number of nodes, predominant role of wireless access, real-time interactions, heterogeneity.</li>
+<li class="">Fog vs cloud: fog distinguished by <b>proximity to end users</b>, dense geographic distribution, mobility.</li>
+<li class="">Limitations of cloud solved by fog: reduce data movement/congestion, eliminate centralized bottlenecks, improved security of encrypted data closer to user.</li>
+</ul>
+<h4>Use-cases &amp; applicability</h4>
+<ul>
+<li class="">Emergency evacuation, natural-disaster management (landslide/flash-flood alerts), large sensor deployments (pre-process/summarize before sending to cloud).</li>
+<li class=""><b>Smart grids, smart traffic lights, connected vehicles (CV), wireless sensor networks, IoT, Software Defined Networks.</b></li>
+<li class="">Connected vehicle: cars-to-cars, cars-to-access-points (Wi-Fi, 3G, LTE, <b>RSUs – roadside units</b>, smart traffic lights).</li>
+</ul>
+<h4>Fog challenges &amp; resource management</h4>
+<ul>
+<li class="">Resource allocation among applications while ensuring <b>end-to-end latency</b>; security.</li>
+<li class="">Resource-management goals: utilize idle fog nodes, more parallelism, <b>load balancing</b>, meet real-time delay requirements, <b>crash fault tolerance</b>, scalability.</li>
+<li class="">Challenges: data may not be at executing node (<b>data fetching</b>); node may become unresponsive; <b>micro-service execution migration</b> to new node; <b>state migration</b> of partially processed data; deploy components to meet latency.</li>
+<li class="">Approaches: execution migration to nearest node; minimize <b>carbon footprint</b> for video streaming; resource prediction/estimation/reservation &amp; pricing; <b>Docker as edge platform</b>; relinquish-probability-based management; base-station association/VM placement (MINLP) for fog medical CPS.</li>
+</ul>
+<h4>Fog security</h4>
+<ul>
+<li class=""><b>Authentication</b> at gateways and fog nodes, <b>Man-in-the-Middle attack</b>, privacy. Smart-grid example: smart meters have IPs; malicious user can <b>tamper with meter, report false readings, spoof IPs</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>7.3 Use Case: Geospatial Cloud (IIT Kharagpur Geo-Cloud)</h3>
+<ul>
+<li class=""><b>Geographic information</b> = info explicitly linked to locations on Earth; <b>static</b> (e.g., lake, town) vs <b>dynamic</b> (e.g., population). Types: legal, political, cultural, climatic, topographic, biotic, medical, economic, infrastructure.</li>
+<li class="">Data sources: social surveys, natural surveys (<b>SOI maps</b>), <b>remote sensing</b> (air photos, satellite), reporting networks (weather stations), <b>field data (GPS)</b>.</li>
+<li class=""><b>GIS</b> = computer system for <b>capturing, storing, querying, analyzing, displaying</b> geospatial data. Components: <b>hardware, software, data management/analysis procedures, spatial data, people</b>.</li>
+<li class="">GIS challenges: <b>data intensive, computation intensive, variable load</b> (needs dynamic scaling), high reliability, network-intensive web services.</li>
+<li class=""><b>Heterogeneity</b> of GIS layers across departments → need homogeneous data description, standard encoding, standard sharing mechanism.</li>
+<li class=""><b>SDI (Spatial Data Infrastructure)</b> – coordination basis for discovery, evaluation, application of spatial data. Interoperable, <b>service-driven GIS</b>.</li>
+<li class=""><b>Need for geospatial cloud</b>: huge data/metadata, need for services &amp; orchestration, evolving standards, organizations share spatial data, little infrastructure/expertise needed, resource pooling, managed services.</li>
+<li class="">Cloud advantages: on-demand scalability, better utilization, minimize IT management, focus on business, low start-up cost (<b>reduce CAPEX</b>), consumption billing, economy of scale, <b>green computing</b>.</li>
+<li class=""><b>Cloud actors</b>: <b>CSP/Broker, Customer, Negotiator (optional), SLA manager/Security auditor</b> (absent in current clouds).</li>
+<li class="">Cloud as provider: collection of <b>enterprise GIS (eGIS)</b> instances with <b>Resource service, Data service, Interface service</b>.</li>
+<li class="">Geospatial cloud model: <b>web services</b> are key; integrate heterogeneous back-end data services (inside/outside cloud); <b>PaaS</b> makes load balancing, replication, scaling transparent; data via <b>WFS, WMS</b> services; metrics: computation power, network bandwidth.</li>
+<li class="">Case studies: <b>merged road network</b> (highway + local roads) → shortest path; <b>merged water network</b> (canal + river) → buffer.</li>
+<li class="">Challenges: spatial DB implementation &amp; scaling, <b>multi-tenancy</b>, policy management among tenants, geographically situated backups, data security.</li>
+<li class=""><b>Interoperability levels</b>: <b>data level</b>, <b>service level</b>, <b>security level</b>.</li>
+<li class="">Security concerns: <b>multi-tenancy</b> and <b>lack of control</b>. Questions to ask: which assets to deploy, value of assets, how they can be compromised.</li>
+</ul>
+</section></article><article class="week" id="w8"><h2><span>Week 8</span>Docker Containers, Green Cloud, Sensor Cloud, IoT Cloud, Course Summary</h2><section class="topic"><h3>8.1 Docker Containers</h3>
+<h4>Basics</h4>
+<ul>
+<li class=""><b>Docker</b> = container management service (initial release <b>March 2013</b>); motto <b>"develop, ship and run anywhere"</b>; supports Agile; solves <b>"works on my machine"</b> problem.</li>
+<li class="">Goal: <b>interoperability</b> – like shipping containers, package an app once and run anywhere (any physical/virtual machine, cloud).</li>
+<li class=""><b>Features</b>: smaller OS footprint via containers; easy cooperation among Dev/QA/Ops; deploy anywhere; <b>lightweight</b> → quick scale up/down; application-level virtualization; build once, run anywhere.</li>
+</ul>
+<h4>Components</h4>
+<ul>
+<li class=""><b>Docker for Mac / Linux / Windows</b>, <b>Docker Engine</b> (builds images, creates containers), <b>Docker Hub</b> (registry hosting images), <b>Docker Compose</b> (define multi-container apps).</li>
+</ul>
+<h4>VM vs Container</h4>
+<ul>
+<li class=""><b>Traditional virtualization</b>: Server → Host OS → <b>Hypervisor</b> (VMware, Hyper-V) → <b>Guest OS per VM</b> → apps. Resource-intensive, large images.</li>
+<li class=""><b>Docker</b>: Server → Host OS → <b>Docker Engine</b> → apps run as containers.</li>
+<li class=""><b>Containers</b> = abstraction at the <b>app layer</b>; package code + dependencies; <b>share the host OS kernel</b>; run as <b>isolated processes in user space</b>; images typically <b>tens of MB</b>; <b>start almost instantly</b>.</li>
+<li class=""><b>VMs</b> run a full guest OS each → heavier; <b>containers and VMs can be used together</b>.</li>
+<li class=""><b>Image</b> = lightweight, stand-alone, executable package (code, runtime, libraries, env variables, config). <b>Container</b> = <b>runtime instance of an image</b>; isolated by default.</li>
+</ul>
+<h4>Docker commands (terminology)</h4>
+<ul>
+<li class=""><b>Image</b>: `images` (list local images), `run` (create container from image and execute), `tag`, `pull` (download from repository), `rmi` (delete local image).</li>
+<li class=""><b>Container</b>: `ps` (running), `ps -a` (all incl. stopped), `top` (processes), `start`, `stop`, `pause`, `rm` (delete container), `commit` (create image from container).</li>
+<li class=""><b>Dockerfile</b> = build script to create images automatically; version-controllable (Git/SVN). <b>Docker Hub</b> = public repository of images; <b>automated builds</b> from Dockerfiles on GitHub.</li>
+<li class="">Usage: developers eliminate environment problems; operators get <b>better compute density</b>; enterprises build agile delivery pipelines (Linux &amp; Windows).</li>
+</ul>
+</section>
+<section class="topic"><h3>8.2 Green Cloud</h3>
+<ul>
+<li class=""><b>Green computing</b> = environmentally responsible use of computers; designing, manufacturing, using, disposing of devices to reduce environmental impact. Green cloud aims at <b>efficient utilization + minimized energy consumption and CO₂</b>.</li>
+<li class="">Cloud advantages: low upfront spend, pay-as-you-go, global workforce, streamline processes, lower capital costs.</li>
+</ul>
+<h4>Why needed</h4>
+<ul>
+<li class=""><b>Gartner 2007: IT industry ≈ 2% of world's CO₂ emissions.</b> <b>US EPA 2007: data centres ≈ 1.5% of US power</b>, more than doubled since 2000, cost $4.5 billion.</li>
+<li class="">Data centres consume <b>10–100× more energy per sq ft</b> than typical office building; <b>energy ≈ 10% of OPEX</b> (can rise to 50%); cooling costs $2–5 million/yr.</li>
+<li class="">Typical DC energy split: <b>IT equipment ≈ 40%</b>, <b>cooling ≈ 45%</b>, <b>power distribution ≈ 15%</b>.</li>
+<li class="">Carbon emission of data centres worldwide exceeds that of Argentina or the Netherlands. <b>Amazon</b>: energy-related costs ≈ <b>42%</b> of data-centre budget (15-year amortization). Google/Microsoft/Yahoo build DCs in barren desert/cold regions near cheap power.</li>
+<li class="">Shift from pure <b>performance</b> to <b>energy efficiency</b> with high service levels.</li>
+</ul>
+<h4>DC architecture &amp; energy models</h4>
+<ul>
+<li class="">Past: <b>two-tier</b> (access + core). Present: <b>three-tier</b> (<b>access, aggregation, core</b>), scales to <b>&gt; 10,000 servers</b>; high-speed 3-tier with <b>ECMP</b> load balancing &amp; <b>100 GE (IEEE 802.3ba)</b>.</li>
+<li class=""><b>Server energy model</b>: P_peak vs P_fixed (memory, disks, I/O); <b>idle server consumes ≈ 66% of peak power</b>; dynamic part depends on CPU frequency/load (DVFS).</li>
+<li class=""><b>Switch energy</b>: chassis ≈ 36%, line cards ≈ 53%, port transceivers ≈ 11%.</li>
+</ul>
+<h4>Green cloud architecture</h4>
+<ul>
+<li class=""><b>Green Broker</b> (leases cloud services, schedules apps; layers: analyze user requirements → compute cost &amp; CO₂ → choose greenest/cheapest offer), <b>CO₂ emission calculator</b>, <b>green policies</b>, <b>Green Middleware</b>.</li>
+<li class=""><b>Power Usage Effectiveness (PUE)</b> = Total facility power / IT equipment power (lower, closer to 1, is better).</li>
+<li class="">Conclusion: <b>Carbon-Aware Green Cloud Framework</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>8.3 Sensor Cloud</h3>
+<ul>
+<li class="">Motivation: growth of sensors (RFID, cameras, phones), real-time web data, <b>Big Data</b>; cloud lacks real-world sensing.</li>
+<li class=""><b>WSN</b> (wireless sensor network): small, low-power, low-cost nodes with sensing, processing, memory, communication; applications in environment, healthcare, defence, etc.</li>
+<li class=""><b>Limitations of sensor networks</b>: hard to scale, proprietary vendor-specific designs, data not shareable, limited compute/storage, fixed/specific applications.</li>
+<li class=""><b>Sensor Cloud</b> = infrastructure allowing pervasive computation using <b>sensors as interface between physical and cyber worlds</b>, data-compute clusters as backbone, Internet as medium; supports <b>complete sensor-data life cycle</b> (collect, access, process, visualize, archive, share, search).</li>
+<li class="">Motivating scenario: tourist's phone uses GPS, physiological sensors, speech, images, maps, recommendations.</li>
+</ul>
+<h4>Framework</h4>
+<ul>
+<li class=""><b>Sensor-Cloud Proxy</b> – interface between sensor resources and cloud; exposes sensors as cloud services; indexing/discovery; manages sensing jobs &amp; data.</li>
+<li class=""><b>Sensor Network Proxy</b> – connects sensor networks lacking direct cloud connection; collects data continuously or on demand; <b>enhances scalability</b>.</li>
+<li class="">Another use case: <b>traffic-flow sensors</b> (plus humidity/temperature sensors) giving local weather data.</li>
+</ul>
+<h4>Virtual sensors</h4>
+<ul>
+<li class=""><b>Virtual sensor</b> = emulation of a physical sensor that obtains data from underlying physical sensors; gives customized view with <b>location &amp; distribution transparency</b>; solves the problem that sensor hardware can't run many VMs.</li>
+<li class="">Configurations: <b>One-to-many</b> (one physical sensor → many virtual sensors; middleware sets sampling rate considering all users), <b>Many-to-one</b> (region's sensors/WSNs aggregated for one virtual sensor), <b>Many-to-many</b> (combination), <b>Derived</b> (generalization; combines different physical sensor types, e.g., "is the wildlife habitat safe?").</li>
+<li class="">Sensor-cloud infrastructure: sensor <b>system management</b> + sensor <b>data management</b>; users create <b>virtual sensor groups</b> dynamically from templates.</li>
+</ul>
+</section>
+<section class="topic"><h3>8.4 IoT Cloud</h3>
+<ul>
+<li class=""><b>IoT</b> = extending Internet to connect/communicate between devices and physical objects ("things"), each with <b>unique identifiers</b> and ability to transfer data; "any time, any place, anyone, anything".</li>
+<li class="">Basic IoT architecture – 3 building blocks: <b>Things, Gateway, Network and Cloud</b>.</li>
+<li class="">IoT aspects/challenges: <b>scalability, big data, real time, highly distributed, security, privacy, safety, speed</b>.</li>
+<li class="">Cloud complements IoT: pay-as-used on-demand, offload storage &amp; processing, anywhere access.</li>
+<li class=""><b>iCOMOT</b> – toolset for managing IoT Cloud systems (top: IoT applications across IoT &amp; cloud; middle: IoT cloud software layer; bottom: monitoring/control/configuration tools).</li>
+<li class="">Case study: <b>IoT-based vehicular data cloud</b> – multilayered platform with services such as <b>intelligent parking cloud service</b> (vacancy detection by sensors) and vehicle-tracking service.</li>
+</ul>
+</section>
+<section class="topic"><h3>8.5 Course Summary &amp; Research Areas</h3>
+<ul>
+<li class="">Course topics: intro &amp; NIST model, properties/characteristics/disadvantages, architecture (stack, XaaS, deployment), service management (<b>SLA, economics</b>), resource management, data management (<b>GFS, HDFS, MapReduce</b>), security (IAM, access control, trust/reputation/risk), open-source &amp; commercial clouds, research trends (<b>Fog, Sensor Cloud, Containers, Green Cloud</b>).</li>
+<li class="">Research areas: infrastructure &amp; services (Storage-/Network-/Information-aaS), management (<b>composition, orchestration, federation, bridging, bursting, migration</b>, hybrid integration, green/energy mgmt, workload profiling, metering/monitoring/auditing), <b>security</b> (data privacy, access control, identity mgmt, <b>side-channel attacks</b>, Security-aaS), performance/scalability/reliability (<b>micro-services</b>), systems software/hardware (virtualization, provisioning orchestration), data analytics, service management (discovery, composition, QoS, semantic services), cloud + other technologies (<b>Fog, IoT Cloud, Containers</b>).</li>
+</ul>
+</section></article><article class="week" id="w9"><h2><span>Week 9</span>Cloud–Fog–Edge Paradigm, Resource Management &amp; Service Placement, Cloud Federation</h2><section class="topic"><h3>9.1 Cloud–Fog–Edge Overview (Lecture 41)</h3>
+<ul>
+<li class="">Cloud = "<b>Anything-as-a-Service</b>". <b>Fog computing</b>: data, processing, applications concentrated in devices <b>at network edge</b>; term introduced by <b>Cisco</b> to ease wireless data transfer to distributed devices in <b>IoT</b>; vision: apps on billions of devices run directly at the edge.</li>
+<li class="">Cloud-Fog-Edge: intelligence brought close to end-user; <b>base stations, routers, Wi-Fi gateways</b> can run applications; <b>end devices (sensors) do basic processing</b>; processing near devices → <b>lower response time → real-time apps</b>.</li>
+</ul>
+<h4>Issues at each layer</h4>
+<ul>
+<li class=""><b>Cloud</b>: <b>latency</b>, <b>bandwidth</b> requirement, not designed for <b>volume, variety, velocity</b> of IoT data.</li>
+<li class=""><b>IoT/Edge devices</b>: limited <b>processing, storage, power</b>.</li>
+<li class=""><b>Fog layer benefits</b>: much lower latency (real-time apps), less network congestion, reduced cloud execution cost, better data location awareness, better handling of huge data.</li>
+</ul>
+<h4>Case study: Health Cloud–Fog–Edge</h4>
+<ul>
+<li class="">5-level hierarchy: <b>Level 0 Cloud → Level 1 ISP → Level 2 Area Gateway → Level 3 Mobile → Level 4 IoT devices</b>.</li>
+<li class="">Simulated using <b>iFogSim</b> (toolkit for modeling &amp; simulating resource management in IoT/Edge/Fog; Gupta, Dastjerdi, <b>Ghosh</b>, Buyya 2017).</li>
+<li class="">Findings: <b>Network usage</b> very low for fog (only few positive cases go to <b>Confirmatory module in cloud</b>) vs high for cloud-only; <b>execution cost</b> higher in cloud-only (only cloud resources incur cost; other resources owned by the organization); <b>latency</b> of control loop <b>fixed/low in fog</b> (modules at Area Gateway) vs higher in cloud (modules in datacenter); energy compared for DC, mobile, edge.</li>
+<li class="">Prototype: <b>Raspberry Pi as fog devices + AWS as cloud</b>; customize resource allocation policy (devices, module requirements, <b>module placement policy</b>).</li>
+</ul>
+</section>
+<section class="topic"><h3>9.2 Resource Management in Cloud–Fog–Edge (Lectures 42–43)</h3>
+<ul>
+<li class="">Cloud-only is not efficient for <b>time-sensitive</b> IoT applications; fog/edge process data <b>close to the source</b>, reducing bandwidth.</li>
+<li class=""><b>Fog and edge are not substitutes for cloud</b> – the three work together for improved latency, reliability, fault tolerance.</li>
+<li class=""><b>Three-layer model</b>: <b>client (edge) layer, fog layer, cloud layer</b>. If fog has no/limited resources, request <b>passes to cloud</b>. Components: <b>fog server manager</b> (assigns processors), VMs, etc.</li>
+<li class="">Trend: <b>decentralize</b> cloud resources toward edge – <b>micro data centers</b> or Internet nodes (routers, gateways, switches) augmented with compute.</li>
+</ul>
+<h4>Survey taxonomy (Hong &amp; Varghese, ACM CSUR 2019)</h4>
+<ul>
+<li class=""><b>Architectures</b> classified by <b>data flow, control, tenancy</b>.</li>
+<li class="sub">Data flow = direction of workload/data movement (user→edge, cloud→edge). Control = centralized vs distributed. Tenancy = single vs multi-tenant.</li>
+<li class=""><b>Infrastructure</b>: <b>Hardware</b> (gateways, Wi-Fi APs, set-top boxes, small home servers, edge ISP servers, cars, drones, desktops/laptops/phones), <b>System software</b> (runs directly on fog hardware; needs <b>multi-tenancy &amp; isolation</b>; <b>system virtualization</b> and <b>network virtualization</b>), <b>Middleware</b> (monitoring, coordination, orchestration, communication, protocols).</li>
+<li class=""><b>Algorithms (4 major)</b>: <b>Discovery</b> (identify edge resources), <b>Benchmarking</b> (capture performance of CPU/storage/network), <b>Load balancing</b> (priorities, fairness), <b>Placement</b> (find appropriate resources for deploying workloads).</li>
+</ul>
+<h4>Service (application) placement problem</h4>
+<ul>
+<li class="">Fog infrastructure = <b>IoT devices (end layer), fog nodes, ≥1 cloud datacenter (cloud layer)</b>; fog is a highly virtualized platform between users and cloud.</li>
+<li class=""><b>Application placement</b> = mapping application components &amp; links onto infrastructure graph (devices + physical links) satisfying requirements/constraints while optimizing an objective.</li>
+<li class=""><b>Constraints</b>: <b>resource</b> (CPU, RAM, storage, bandwidth), <b>network</b> (latency, bandwidth), <b>application</b> (e.g., <b>locality requirement</b>, dependencies/QoS).</li>
+<li class=""><b>Optimization objectives/metrics</b>: <b>latency, resource utilization, cost, energy consumption</b>.</li>
+<li class=""><b>Offloading</b> = moving server/application/data to the network edge; <b>user device → edge</b> (usually single hop; application partitioning), and <b>cloud → edge</b> (bring services closer to source).</li>
+</ul>
+</section>
+<section class="topic"><h3>9.3 Cloud Federation (Lecture 44)</h3>
+<ul>
+<li class=""><b>Federated cloud</b> = deployment &amp; management of <b>multiple external and internal cloud services</b> to match business needs; <b>union of several smaller parts performing a common action</b>.</li>
+<li class="">Collaboration among <b>CSPs</b> for capacity utilization, <b>interoperability</b>, catalog of services, insight into providers and SLAs.</li>
+<li class="">Motivation/benefits: maximize resource utilization, <b>minimize power consumption</b>, load balancing, global utility, expand CSP's global footprint; overcome service interruptions, lack of interoperability, degradation of services.</li>
+<li class="">Characteristics: inter-cloud organization with <b>voluntary</b> nature; maximum geographical separation; well-defined marketing system and <b>regulated federal agreement</b>.</li>
+</ul>
+<h4>Coupling levels</h4>
+<ul>
+<li class=""><b>Loosely coupled</b>: limited interoperation; e.g., private cloud using external commercial cloud; <b>little/no control over remote resources</b> (no VM placement decisions), limited monitoring (CPU/memory/disk only), <b>no cross-site networks</b>.</li>
+<li class=""><b>Partially coupled</b>: <b>contract/framework agreement</b> between partner clouds; some control (e.g., <b>affinity rules</b>), more detailed monitoring.</li>
+<li class=""><b>Tightly coupled</b>: governed by <b>same cloud administration</b>; advanced control (exact VM placement), full monitoring, <b>cross-site networks, cross-site VM migration, high availability techniques</b>.</li>
+</ul>
+<h4>Federation architectures (Moreno-Vozmediano, Montero, Llorente 2012)</h4>
+<ul>
+<li class=""><b>Hybrid / Bursting</b> – on-premise (private) cloud + public cloud resources for <b>peak demand</b>; <b>loosely coupled</b>.</li>
+<li class=""><b>Broker</b> – broker serves users and accesses several public clouds; <b>most common federation scenario</b>; advanced broker schedules by cost/performance/energy.</li>
+<li class=""><b>Aggregated</b> – two or more <b>partner clouds</b> aggregate resources into a larger virtual infrastructure; usually <b>partially coupled</b>.</li>
+<li class=""><b>Multitier</b> – multiple cloud sites (usually same corporation) each with its own cloud OS, managed by a <b>third (root/top) cloud OS</b> in a hierarchy; <b>tightly coupled</b>; exposes all sites as single cloud.</li>
+<li class="">Coupling order: <b>Bursting/Broker (loose) → Aggregated (partial) → Multitier (tight)</b>.</li>
+</ul>
+</section></article><article class="week" id="w10"><h2><span>Week 10</span>VM Migration (Live Migration) &amp; Containers (Docker, Kubernetes)</h2><section class="topic"><h3>10.1 VM Migration – Basics</h3>
+<ul>
+<li class=""><b>VM migration</b> = moving a running application/VM from one physical host to another; <b>processor state, storage, memory and network connection</b> move together.</li>
+<li class=""><b>Why migrate</b>: <b>load balancing</b>, <b>maintenance</b> (transparent), <b>reduce operational parameters/power</b> (consolidate VMs on fewer servers; put idle servers in low-power mode), <b>QoS/SLA violation</b> avoidance, <b>fault tolerance</b> (proactively handle failures), power management.</li>
+<li class=""><b>When</b>: remove a machine from service; relieve load on congested hosts.</li>
+</ul>
+<h4>Types</h4>
+<ul>
+<li class=""><b>Cold / non-live migration</b>: VM <b>turned off or suspended</b> during migration → <b>downtime = total migration time</b>; bad for large VMs/real-time apps.</li>
+<li class=""><b>Hot / live migration</b>: VM <b>keeps providing service</b> during migration; entire VM (all user processes and kernel state) moved <b>without shutdown</b>. Two main approaches: <b>pre-copy</b> and <b>post-copy</b>.</li>
+</ul>
+<h4>Concerns</h4>
+<ul>
+<li class=""><b>Minimize downtime</b> (time service is unavailable), <b>minimize total migration time</b>, avoid disrupting active services via <b>resource contention</b> (CPU, network bandwidth).</li>
+</ul>
+<h4>What to migrate</h4>
+<ul>
+<li class=""><b>CPU context + main memory</b>; <b>disk</b> (not critical if <b>NAS</b> shared or disk mirrored); <b>network</b> (migrate IP address; advertise new MAC via <b>ARP reply</b>; switches learn new MAC location; both hosts on same LAN); <b>virtual I/O devices</b>.</li>
+</ul>
+<h4>Memory migration techniques</h4>
+<ul>
+<li class=""><b>Push</b> – source keeps running while pages pushed; pages modified during transfer are <b>re-sent</b>.</li>
+<li class=""><b>Stop-and-copy</b> – source VM stopped, pages copied, new VM started (downtime).</li>
+<li class=""><b>Pull</b> – new VM runs; <b>page faults pull</b> missing pages from source.</li>
+</ul>
+<h4>Pre-copy (iterative) live migration</h4>
+<ul>
+<li class=""><b>Phase 1 – Pre-copy (iterative push)</b>: several rounds; VM keeps running at source; <b>round 1 copies all pages</b>, later rounds copy <b>dirty pages</b> (modified during previous round).</li>
+<li class=""><b>Phase 2 – Termination</b>: stop when <b>any one</b> of: <b>(i) number of rounds exceeds threshold, (ii) total memory transmitted exceeds threshold, (iii) dirty pages of previous round fall below threshold</b>.</li>
+<li class=""><b>Phase 3 – Stop-and-copy</b>: VM <b>suspended</b> at source; remaining dirty pages + <b>CPU state</b> sent; VM <b>resumed at destination</b> (T_res = restart time).</li>
+<li class="">Drawback: frequently-dirtied pages sent many times → <b>long migration time</b>.</li>
+</ul>
+<h4>Post-copy live migration</h4>
+<ul>
+<li class=""><b>Stop phase</b> (stop source, copy <b>CPU state</b>) → <b>Restart phase</b> (start destination VM with <b>empty memory</b>) → <b>On-demand copy</b> (pages fetched on page fault; techniques: <b>demand paging, active push, pre-paging, dynamic self-ballooning</b>).</li>
+<li class="">Advantages: each page transferred <b>once</b>; lower total migration time; some pages never needed.</li>
+</ul>
+<h4>Analysis formulas</h4>
+<ul>
+<li class=""><b>Non-live</b>: <b>T_mig = V_m / R</b> (V_m = VM memory size, R = transmission rate); <b>T_down = T_mig</b>.</li>
+<li class=""><b>Pre-copy</b>: dirty ratio <b>r = (P × D) / R</b> (P = page size, D = dirtying rate, R = transmission rate); need <b>r &lt; 1</b> for convergence.</li>
+<li class="sub">Round 0: t₀ = V_m/R; round j: <b>t_j = r^j · V_m/R</b> (dirty data in round j = r^j V_m).</li>
+<li class="sub">Total <b>T_mig = (V_m/R) · (1 + r + r² + … + rⁿ) + T_res = (V_m/R)·(1 − r^(n+1))/(1 − r) + T_res</b>.</li>
+<li class="sub"><b>Downtime T_down = (V_m/R) · rⁿ + T_res</b> (only the last stop-and-copy round).</li>
+<li class="sub"><b>Number of rounds</b>: stop when r^j·V_m &lt; V_th ⇒ <b>n = min(⌈log_r(V_th/V_m)⌉, n_max)</b>.</li>
+</ul>
+<h4>Migrating multiple VMs</h4>
+<ul>
+<li class=""><b>Serial migration</b> of m correlated VMs: first VM runs its pre-copy cycle while others keep running; when it enters stop-and-copy, <b>remaining (m−1) VMs are suspended</b> (to stop dirtying memory) and copied afterwards → <b>T_down = (V_m/R)·rⁿ + (m−1)(V_m/R) + T_res</b>; migration time ≈ m × single-VM time.</li>
+<li class=""><b>Parallel migration</b>: all m VMs start pre-copy simultaneously, <b>each gets R/m bandwidth</b>; effective dirty ratio becomes <b>m·r</b>; all enter/finish stop-and-copy together → <b>T_down = (m·V_m/R)·(m·r)^n(p) + T_res</b>; may need more rounds / higher downtime.</li>
+</ul>
+</section>
+<section class="topic"><h3>10.2 Containers</h3>
+<ul>
+<li class=""><b>Container</b> = <b>lightweight virtualization</b>; packages <b>code + all dependencies</b> so app runs quickly/reliably across environments; <b>virtualizes the operating system</b>; abstracts app from environment (private DC, public cloud, laptop).</li>
+<li class="">Benefits: <b>agile development</b>, <b>separation of responsibility</b> (devs: app logic; ops: deployment), <b>workload portability</b> (Linux/Windows/Mac; VMs/bare metal; on-prem/public cloud), <b>resource efficiency &amp; density</b>, consistency, scalability.</li>
+<li class="">A container is a <b>sandboxed process isolated from other processes</b>; <b>runnable instance of an image</b>; managed via API/CLI (create, start, stop, move, delete).</li>
+</ul>
+<h4>Traditional vs Virtualized vs Container deployment</h4>
+<ul>
+<li class=""><b>Traditional</b>: apps on physical servers; <b>no resource boundaries</b> → allocation issues.</li>
+<li class=""><b>Virtualized</b>: multiple <b>VMs on one server</b>; isolation between VMs; better utilization &amp; scalability; each VM has full OS.</li>
+<li class=""><b>Container</b>: <b>relaxed isolation – share the host OS kernel</b>; lightweight; own filesystem, CPU share, memory, process space; portable across clouds and OS distributions.</li>
+<li class="">VM = guest OS on top of host OS/hypervisor (heavy); container = far more lightweight.</li>
+</ul>
+</section>
+<section class="topic"><h3>10.3 Kubernetes</h3>
+<ul>
+<li class=""><b>Kubernetes (K8s)</b> = portable, extensible, <b>open-source</b> platform for <b>managing containerized workloads and services</b> (declarative configuration + automation); name is Greek for <b>helmsman/pilot</b>. Operates at <b>container level</b>, not hardware level.</li>
+<li class="">Functions: <b>automating deployment, scaling, management</b> of containerized apps.</li>
+<li class=""><b>Cluster components</b>: <b>worker machines = nodes</b> run containerized apps; <b>Pods</b> = components of app workload hosted on nodes; <b>control plane</b> manages nodes and Pods (in production runs on multiple computers for fault tolerance &amp; high availability); a cluster has <b>at least one worker node</b>.</li>
+</ul>
+</section>
+<section class="topic"><h3>10.4 Docker</h3>
+<ul>
+<li class="">Platform to <b>"build, ship, and run any app, anywhere"</b>; standard way to solve <b>deployment</b>; docker analogy: dock workers loading standardized shipping containers.</li>
+<li class=""><b>Docker Engine</b> properties: <b>Standard</b> (industry standard, portable), <b>Lightweight</b> (shares host kernel; no OS per app → higher server efficiency, lower licensing cost), <b>Secure</b> (strong default isolation).</li>
+<li class=""><b>Docker image</b> = lightweight, standalone, executable package (code, runtime, system tools, libraries, settings); <b>images become containers at runtime</b> on Docker Engine; works for Linux and Windows apps.</li>
+</ul>
+<h4>Benefits / uses (Docker in Practice)</h4>
+<ul>
+<li class="">Configuration effort separated from resource management; deployment is trivial (pull image &amp; run) – runs on Red Hat, Ubuntu, CentOS as long as Docker is installed.</li>
+<li class="">Uses: <b>replacing VMs</b>, <b>prototyping software</b>, <b>packaging software</b>, <b>enabling microservices architecture</b>, <b>modeling networks</b> (hundreds/thousands of isolated containers on one machine), <b>full-stack productivity offline</b>, <b>reducing debugging overhead</b>, <b>documenting software dependencies</b>, <b>enabling continuous delivery (CD)</b>.</li>
+</ul>
+<h4>Architecture</h4>
+<ul>
+<li class="">Docker on a host = <b>daemon (server with RESTful API)</b> + <b>client (CLI)</b>; client talks to daemon over <b>HTTP</b>; daemon manages images and containers, fetches images from a <b>registry</b> (public Docker Hub or <b>private registry</b> on internal network).</li>
+</ul>
+<h4>Demo (Lectures 49–50)</h4>
+<ul>
+<li class="">Objective: run <b>MySQL + phpMyAdmin</b> on Docker. <b>MySQL</b> = widely used open-source relational DB; <b>phpMyAdmin</b> = web-based GUI to manage MySQL.</li>
+<li class=""><b>Without containers</b>: install MySQL, Apache web server, PHP, phpMyAdmin separately; moving to another machine needs reinstall + <b>backup &amp; restore</b> of data. <b>With containers</b>: pull images and run → portable, quick.</li>
+</ul>
+</section></article><article class="week" id="w11"><h2><span>Week 11</span>Dew Computing, Serverless Computing (FaaS), Sustainable Cloud Computing</h2><section class="topic"><h3>11.1 Dew Computing (Lecture 51)</h3>
+<h4>Concept</h4>
+<ul>
+<li class=""><b>Dew computing (DC)</b> = paradigm combining core cloud-computing concepts with the <b>capabilities of end devices</b> (PCs, phones); aims to solve cloud's <b>reliance on Internet access</b> (works in <b>offline mode</b>).</li>
+<li class="">Cloud "family" hierarchy by distance from ground: <b>Cloud (far) → Fog (closer) → Edge → Dew (closest, on the end device)</b>. "Dew" = water droplets on the ground.</li>
+<li class="">DC is <b>user-centric, personalized</b>; located very close to end devices and is <b>first in the IoT–fog–cloud continuum</b>; <b>micro-service-based, vertically distributed hierarchy</b>; includes smart phones, watches, tablets at network edge.</li>
+<li class="">Primary goal: access a pool of raw data with <b>metadata</b> that can be created/edited/stored/deleted with minimal network management (offline).</li>
+<li class=""><b>Typical example: Dropbox</b> – keeps local copies + cloud copy; works offline, <b>synchronizes</b> when connection returns.</li>
+</ul>
+<h4>Key features</h4>
+<ul>
+<li class=""><b>Independence</b> – local device must provide service <b>without continuous Internet connection</b>.</li>
+<li class=""><b>Collaboration</b> – application must <b>connect to the cloud and synchronize</b> data when appropriate.</li>
+</ul>
+<h4>Dew service models (applications)</h4>
+<ul>
+<li class=""><b>Infrastructure-as-Dew (IaD)</b> – local device dynamically supported by cloud services.</li>
+<li class=""><b>Software-in-Dew (SiD)</b> – <b>configuration and ownership of software saved in cloud</b> (e.g., Apple App Store, Google Play).</li>
+<li class=""><b>Platform-in-Dew (PiD)</b> – software development suite installed locally with settings/app data <b>synchronized to cloud</b>.</li>
+<li class=""><b>Storage-in-Dew (StiD)</b> – local storage partially/fully <b>copied into cloud</b> (e.g., Dropbox).</li>
+<li class=""><b>Web-in-Dew (WiD)</b> – local device holds a <b>duplicated fraction of the World Wide Web</b>.</li>
+</ul>
+<h4>Architecture</h4>
+<ul>
+<li class=""><b>Dew Virtual Machine (DVM)</b> = isolated environment on local machine to execute the <b>dew server</b>; components: <b>Dew Client Program, Dew Client Service, Dew Server, Dew DBMS</b>; <b>Single-Super-Hybrid-Peer (P2P) communication link</b> to cloud server; IoT devices &amp; sensors connect to host machine.</li>
+<li class=""><b>Dew server functions</b>: serve requested services; <b>synchronize local and remote data</b>. Goals: <b>Data replication, data distribution, synchronization</b>.</li>
+</ul>
+<h4>Challenges</h4>
+<ul>
+<li class=""><b>Power management, processor utility, data storage, viability of OS, programming principles, database security.</b></li>
+</ul>
+</section>
+<section class="topic"><h3>11.2 Serverless Computing (Lectures 52–53)</h3>
+<h4>Basics</h4>
+<ul>
+<li class=""><b>Serverless computing</b> = providing <b>backend services on an as-used basis</b>; developers write/deploy code without worrying about infrastructure; eliminates system administration; <b>servers still exist</b> but are invisible.</li>
+<li class="">Developers write <b>functions</b>, provider runs them in <b>shared runtime environment</b>, scaling automatically (many functions in parallel); <b>pay only when code runs</b>.</li>
+<li class="">Serverless target = <b>programmers</b>; classic cloud target = <b>system administrators</b>. Event-driven, granular applications.</li>
+<li class="">Code runs in <b>almost-stateless, event-triggered, ephemeral containers</b> (may last for one invocation); containerization → faster boot ("cold start" reduction).</li>
+<li class="">Two categories: <b>Backend-as-a-Service (BaaS)</b> and <b>Function-as-a-Service (FaaS)</b>.</li>
+<li class=""><b>BaaS</b>: replace server-side components with <b>off-the-shelf services</b> (authentication, database, cloud storage, hosting); e.g., <b>Google Firebase</b>; logic mostly in frontend.</li>
+<li class=""><b>FaaS</b>: cloud provider manages <b>resources, lifecycle and event-driven execution</b> of <b>small, stateless functions</b>; each function = small part of the app; short execution time; event-triggered.</li>
+</ul>
+<h4>Challenges</h4>
+<ul>
+<li class=""><b>Asynchronous calls</b> add complexity; <b>functions calling functions</b> (complex debugging, loose isolation, double billing for synchronous calls); <b>too many libraries</b> (image size limit, longer warm-up); <b>too many technologies</b> (maintenance complexity); <b>too many functions</b> (poor reuse; inactive functions); cold start; statelessness.</li>
+</ul>
+<h4>Major providers &amp; platforms</h4>
+<ul>
+<li class=""><b>AWS Lambda</b> (Amazon; event-driven; code runs in response to events such as <b>S3 file add/delete, API Gateway HTTP request</b>; languages: Java, Python, Go, C#, etc.; <b>billed only for compute time while code runs</b>).</li>
+<li class="sub">Concepts: <b>Function</b>, <b>Runtime</b>, <b>Event source</b> (AWS service that triggers the function), <b>Layers</b>, <b>Log streams</b>.</li>
+<li class="sub">Workflow: upload code → configure trigger/event details → Lambda executes on trigger → charges only for execution.</li>
+<li class=""><b>Google Cloud Functions</b> – serverless execution environment of <b>single-purpose functions</b> attached to events from cloud services (Cloud Storage, Pub/Sub, Firebase, Stackdriver Logging, Firestore, Compute Engine, BigQuery, direct <b>HTTP</b>).</li>
+<li class="sub"><b>Event</b> (occurs in GCP), <b>Trigger</b> (event + response binding), <b>Event data</b> (passed to function). Multiple event occurrences → multiple invocations; function should be single-purpose, short, and signal completion.</li>
+<li class=""><b>Azure Functions</b> – serverless solution: write less code, maintain less infrastructure, save costs; languages <b>C#, Java, JavaScript, PowerShell, Python</b> (custom handlers); patterns: serverless APIs, event &amp; stream processing, IoT data processing, ML pipelines, automation, integration/pub-sub; scenarios: retail web backend, financial mobile backend.</li>
+</ul>
+</section>
+<section class="topic"><h3>11.3 Sustainable Cloud Computing (Lectures 54–55)</h3>
+<h4>Why</h4>
+<ul>
+<li class="">CSPs depend on <b>Cloud Data Centers (CDCs)</b>; financial + <b>carbon-footprint</b> costs hurt sustainability. Focus: <b>minimize energy consumption &amp; carbon footprint while ensuring reliability</b>.</li>
+<li class="">CDC energy use rising; projected <b>≈ 8000 TWh by 2030</b>. Under-/over-loading of resources wastes energy.</li>
+<li class="">Major CSPs (<b>Google, Amazon, Microsoft, IBM</b>) plan <b>renewable-powered</b> data centers; relocate data centres based on <b>waste-heat recovery, access to green energy, free cooling</b>.</li>
+<li class="">Need <b>holistic, energy-aware resource management</b> (servers, storage, memory, network, cooling).</li>
+</ul>
+<h4>Conceptual model (Buyya &amp; Gill, 2018) – layered architecture</h4>
+<ul>
+<li class=""><b>Cloud architecture</b> (SaaS, PaaS, IaaS), <b>Cooling manager</b> (thermal alerts/temperature), <b>Power manager</b> (controls <b>renewable vs grid energy</b> using <b>Automatic Transfer Switch (ATS)</b> and <b>Power Distribution Unit (PDU)</b>), plus resource scheduling &amp; management layers. Grid energy used for deadline-oriented workloads to keep reliability.</li>
+</ul>
+<h4>Reliability vs sustainability</h4>
+<ul>
+<li class=""><b>Issues – energy</b>: reduce CDC energy, reduce under/over-loading (load balancing), minimize heat, reduce carbon footprint, improve bandwidth/compute/storage management. <b>Reliability</b>: detect failures, etc.</li>
+<li class=""><b>Trade-off</b>: replicating services for reliability <b>increases energy consumption</b>; <b>frequent server on/off (power modulation) reduces reliability</b> of components (storage, memory). Reducing energy improves utilization, reliability, performance.</li>
+</ul>
+<h4>Components of sustainable cloud computing</h4>
+<ul>
+<li class=""><b>Application model</b> (data parallel, function parallel, message passing); <b>resources targeted in energy management</b> (processor, memory, storage, network, cooling); <b>thermal-aware scheduling</b> (architecture single-/multi-core; mechanism <b>reactive or proactive</b>; minimize cooling set-point temperature); <b>capacity planning</b> (power infrastructure, IT resources, workloads; ROI); <b>waste heat utilization</b> (<b>vapor-absorption-based cooling/free cooling</b> can make <b>PUE ideal</b>).</li>
+</ul>
+<h4>Taxonomy (Gill &amp; Buyya, ACM CSUR 2018)</h4>
+<ul>
+<li class="">Research categories: <b>application design, sustainability metrics, capacity planning, energy management, virtualization, thermal-aware scheduling, cooling management, renewable energy, waste heat utilization</b>.</li>
+<li class=""><b>Virtualization</b> supports energy-efficient <b>VM migration, elasticity, load balancing, consolidation, fault tolerance, scheduling</b>.</li>
+<li class=""><b>Renewable energy</b> (solar, wind, water) gives near-zero CO₂.</li>
+<li class="">Next-generation cloud must be <b>energy efficient and sustainable</b>, powered by renewable energy.</li>
+</ul>
+</section></article><article class="week" id="w12"><h2><span>Week 12</span>Cloud in 5G Era, Cyber-Physical Systems, Spatial Cloud, Internet of Health Things (IoHT) Case Study</h2><section class="topic"><h3>12.1 Cloud Computing in the 5G Era (Lecture 56)</h3>
+<h4>5G basics</h4>
+<ul>
+<li class=""><b>5G = fifth-generation mobile network</b>; global wireless standard after 1G–4G; connects people, machines, objects, devices; delivers <b>multi-Gbps peak data rates, ultra-low latency, higher reliability, massive capacity, uniform user experience</b>.</li>
+<li class="">Generations: <b>1G (1980s) analog voice</b>; <b>2G (early 1990s) digital voice (CDMA)</b>; <b>3G (early 2000s) mobile data</b>; <b>4G LTE (2010s) mobile broadband</b>; <b>5G</b> unified, forward-compatible platform.</li>
+</ul>
+<h4>Three 5G service categories</h4>
+<ul>
+<li class=""><b>eMBB – Enhanced Mobile Broadband</b>: indoor/outdoor broadband, enterprise collaboration, <b>AR/VR</b>.</li>
+<li class=""><b>mMTC – Massive Machine-Type Communications</b>: <b>IoT</b>, asset tracking, smart agriculture, smart cities, energy monitoring, smart home.</li>
+<li class=""><b>URLLC – Ultra-Reliable Low-Latency Communications</b>: <b>autonomous vehicles, smart grids, remote patient monitoring/telehealth, industrial automation</b> (mission-critical).</li>
+</ul>
+<h4>5G and cloud</h4>
+<ul>
+<li class="">5G is the "perfect companion" to cloud (distributed, diverse compute/storage); on-premises and <b>edge data centers</b> bridge gap between low-latency devices and distant clouds → <b>heterogeneous, distributed computing</b>; need <b>end-to-end orchestration</b>.</li>
+<li class="">Two-way relationship: (1) cloud must evolve to meet 5G needs → <b>edge, mobile edge, fog computing</b>; (2) 5G is being <b>"cloudified"</b> through <b>network softwarization, NFV (Network Function Virtualization), SDN</b>.</li>
+<li class=""><b>Edge computing in 5G</b>: brings cloud capabilities near users/UEs to overcome <b>high latency</b>; 5G must handle <b>massive data</b> from mobile/IoT, <b>stringent QoS (ultra-low latency, high throughput)</b>, <b>heterogeneity/interoperability</b>.</li>
+<li class="">Edge applications: healthcare, entertainment &amp; multimedia, <b>VR/AR/MR</b>, <b>tactile Internet</b>, IoT, factories of the future, emergency response, <b>Intelligent Transportation Systems (ITS)</b>.</li>
+<li class=""><b>5G + Mobile Cloud Computing</b>: resource sharing, improved reliability (backup in cloud), <b>offload processing</b> to cloud → fewer device resources used.</li>
+</ul>
+</section>
+<section class="topic"><h3>12.2 Cyber-Physical Systems (CPS) &amp; Cloud (Lecture 57)</h3>
+<ul>
+<li class=""><b>CPS</b> = <b>orchestration of computers and physical systems</b>; embedded computers <b>monitor and control physical processes via feedback loops</b>; physical processes affect computations and vice versa.</li>
+<li class="">Term <b>coined around 2006 by Helen Gill (NSF, USA)</b>. CPS is about the <b>intersection, not the union</b>, of physical and cyber.</li>
+<li class="">CPS = "<b>integration of computation with physical processes</b>" using <b>sensors and actuators</b>; "computing as a physical act". Interlinked networks of sensors, actuators and processing devices → <b>Smart Networked Systems and Societies (SNSS)</b>.</li>
+<li class="">Goals: improve <b>adaptability, autonomy, efficiency, functionality, reliability, safety, usability</b>.</li>
+<li class=""><b>Cyber-Physical Cloud Computing (CPCC)</b> (NIST report, 2013): "a system environment that can <b>rapidly build, modify and provision CPS</b> composed of a set of <b>cloud-based sensor, processing, control and data services</b>".</li>
+<li class=""><b>CPCC benefits</b>: efficient resource use, <b>modular composition</b>, rapid development &amp; scalability, smart adaptation to environment at every scale, reliable &amp; resilient architecture.</li>
+<li class="">Examples: <b>cloud-based CPS for intelligent monitoring of machining processes</b>; <b>Cloud-Edge computing framework for Cyber-Physical-Social services</b> (Wang, Yang et al., IEEE Commun. Mag. 2017).</li>
+</ul>
+</section>
+<section class="topic"><h3>12.3 Spatial Cloud Computing – Case Study I (Lecture 58)</h3>
+<ul>
+<li class=""><b>Spatial/geospatial data</b> = information describing objects/events with a <b>location on/near Earth's surface</b>; combines <b>location + attribute + temporal</b> information.</li>
+<li class=""><b>Spatial analysis</b> = solving location-oriented problems; goes <b>beyond mapping</b> to study characteristics of places and relationships; supports decision making.</li>
+<li class=""><b>Spatial analytics + cloud</b>: elastic, on-demand platform integrating observation systems, parameter-extraction algorithms, simulations, visualization &amp; decision support; helps search/access geospatial data and configure compute for intensive simulation models.</li>
+<li class=""><b>Spatial cloud</b>: shared <b>resource pooling</b>, choice of deployment/service/business models, managed services prevent data loss.</li>
+<li class=""><b>Advantages</b>: <b>easy to use</b> (deploy infrastructure with a click/API), <b>scalability</b>, <b>cost</b> (usage-based), <b>reliability</b> (enterprise hardware; multiple clouds), <b>risk</b> (change instantly, even OS).</li>
+<li class="">Typical architecture: organizations share spatial data; easy access to spatial services; integrate latest databases, merge disparate systems, exchange information.</li>
+</ul>
+<h4>Mobility analytics &amp; Traj-Cloud</h4>
+<ul>
+<li class=""><b>Mobility/trajectory analytics</b> on cloud for <b>smart-city / ITS</b> (location-based services, transport planning, urban dynamics).</li>
+<li class=""><b>Traj-Cloud</b> (Ghosh &amp; Ghosh, COMSNETS 2019) services on <b>Google Cloud Platform (GCP)</b>:</li>
+<li class="sub"><b>TS1 Trajectory data indexing</b> – input GPS trace + semantic info; output <b>spatio-temporal indices</b>; uses <b>Google BigQuery and Cloud SQL</b>.</li>
+<li class="sub"><b>TS2 Trajectory map-matching</b> – project GPS trace onto road network using <b>MapReduce-based platform</b>.</li>
+<li class="sub">Further services for semantic analysis of movement behaviour.</li>
+</ul>
+</section>
+<section class="topic"><h3>12.4 Internet of Health Things (IoHT) – Case Study II (Lectures 59–60)</h3>
+<h4>Cloud–Fog–Edge–IoHT framework</h4>
+<ul>
+<li class=""><b>Fog computing</b> brings cloud closer to data-producing sensors; routers/servers/switches act as <b>fog nodes</b>; used for real-time apps; <b>health data processed at edge/fog to reduce latency, network usage and cloud cost</b>.</li>
+<li class="">Cloud limitations: <b>latency, large data volume, bandwidth</b>. IoT device limitations: <b>processing, storage, power</b>. Fog–edge benefits: reduced latency (real-time), less congestion, lower cloud execution cost, better handling of colossal sensor data, <b>location awareness</b>.</li>
+<li class=""><b>Objectives</b>: design <b>fog-edge health model</b> to reduce latency, network usage, cloud cost; <b>test in iFogSim</b>; develop <b>customized wearable device</b>; implement on hardware; study <b>dew computing</b> in the health scenario.</li>
+<li class="">Overall workflow: conceptualization/modelling → <b>iFogSim simulation</b> &amp; evaluation → <b>hardware implementation</b> (custom body sensor) → <b>activity detection using accelerometer</b> and <b>heart-attack prediction</b> → <b>dew-based</b> model.</li>
+<li class=""><b>Hierarchical topology</b>: <b>Cloud (Level 0) → Fog (Level 1) → Edge (Level 2) → IoT (Level 3)</b> (in the 5-level version: Cloud, ISP, Area Gateway, Mobile, IoT).</li>
+<li class=""><b>Device configuration (typical)</b>: Cloud MIPS 44800, RAM 40000 MB; ISP/AreaGW 2800 MIPS, 4000 MB; Mobile 350 MIPS, 1000 MB. <b>Link latencies (ms)</b>: body sensor→mobile 1, mobile→Area GW 2, Area GW→ISP GW 2, <b>ISP GW→Cloud 100</b>, mobile→display 1.</li>
+</ul>
+<h4>Application placement (modules)</h4>
+<ul>
+<li class=""><b>Fog-based model</b>: Client module → Mobile (edge); <b>Data filtering, Data processing, Event handler → Area Gateway (fog)</b>; <b>Confirmatory module → Cloud</b>.</li>
+<li class=""><b>Cloud-based model</b>: Client module at mobile; <b>all other modules in Cloud</b>.</li>
+<li class="">Simulation configs: 1–5 with <b>1, 2, 4, 8, 16 Area Gateways</b> and <b>4, 8, 16, 32, 64 users</b>.</li>
+</ul>
+<h4>Performance results (fog vs cloud)</h4>
+<ul>
+<li class=""><b>Latency</b>: fog latency <b>fixed/low</b> (control-loop modules at area gateway); cloud higher and grows.</li>
+<li class=""><b>Network usage</b>: fog <b>very low</b> (only positive cases reach cloud Confirmatory module); cloud high.</li>
+<li class=""><b>Cost of execution</b>: fog lower (only cloud resources incur cost; others owned by org); cloud higher.</li>
+<li class=""><b>Energy</b>: mobile energy same in both; fog/DC energy changes with configuration.</li>
+</ul>
+<h4>Hardware implementation</h4>
+<ul>
+<li class=""><b>Customized body sensor</b> (BP &amp; pulse meter), <b>NodeMCU ESP8266</b> (Arduino-like board with Wi-Fi), <b>ADXL345 accelerometer</b> (x, y, z), <b>Raspberry Pi 3 as fog device</b> (64-bit, 1 GB RAM, Wi-Fi, Bluetooth), <b>AWS as cloud</b>.</li>
+</ul>
+<h4>Activity detection (accelerometer)</h4>
+<ul>
+<li class="">Pipeline: data extraction → <b>A = √(x² + y² + z²)</b> → <b>5-point smoothing</b> (average of 2 preceding, itself, 2 succeeding) → <b>feature extraction</b> (max, min, mean amplitude, std deviation, energy in time domain, energy in frequency domain) → <b>min-max normalization Y = (x − min)/(max − min)</b> → <b>KNN classifier, K = 3</b> (chosen by 5-fold cross-validation using GridSearchCV).</li>
+</ul>
+<h4>Cardiac attack prediction (illustrative logic, no clinical significance)</h4>
+<ul>
+<li class="">Uses KNN activity factor f+1 to scale: p = BPM/f, s = systolic/f, d = diastolic/f. <b>Alarm if p ≥ 170 AND s ≥ 180 AND d ≥ 120</b> (thresholds BPM ≥ 170, diastolic ≥ 120, systolic ≥ 180).</li>
+</ul>
+<h4>Dew-based extension (CONFRONT framework)</h4>
+<ul>
+<li class=""><b>Dew computing</b> = on-premises software-hardware organization paradigm where the on-premises computer provides functionality <b>independent of cloud services yet collaborative</b> with them.</li>
+<li class="">Workflow: sensor collects data → if <b>cloud connectivity</b> available → <b>fog/cloud processing</b>; else if <b>dew connectivity</b> available → <b>dew-based processing</b>, <b>sync with cloud</b> later; else wait.</li>
+<li class=""><b>Comparison (Cloud vs Cloud-Fog-Edge vs With Dew)</b>: on-premise resource utilization <b>Low / Sub-optimal / Optimal</b>; connectivity <b>Internet / Local / Local</b>; uptime <b>Low / High / High</b>; bandwidth <b>High / Low / Low</b>; latency <b>High / Low / Low</b>; infrastructure requirement <b>Low / Moderate / Moderate</b>; processing power <b>High / Limited / Limited</b>; data storage <b>High / Low / Moderate</b>.</li>
+<li class="">Reference: <b>CONFRONT – Cloud-fog-dew based monitoring framework for COVID-19 management</b> (Poonia, Ghosh, …, Buyya; *Internet of Things*, Elsevier 2021).</li>
+</ul>
+</section></article></main><script>
+const q=document.getElementById('q');q.addEventListener('input',()=>{const v=q.value.trim().toLowerCase();
+document.querySelectorAll('li').forEach(li=>{li.querySelectorAll('mark').forEach(m=>m.replaceWith(m.textContent));li.classList.remove('hide');
+if(v){if(li.textContent.toLowerCase().includes(v)){li.innerHTML=li.innerHTML.replace(new RegExp('(?![^<]*>)('+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')}else li.classList.add('hide')}});});
+</script></body></html>
